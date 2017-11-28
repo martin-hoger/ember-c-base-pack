@@ -6,14 +6,10 @@ export default Ember.Component.extend({
 
   actions: {
     close() {
-      // If there is onClose action,
-      // check the return value from the action to find out
-      // if we can close the window.
-      if (this.attrs.onClose !== undefined && !this.attrs.onClose()) {
-        return false;
+      // If there is onClose action, fire the function.
+      if (this.attrs && this.attrs.onClose !== undefined) {
+        this.attrs.onClose()
       }
-      // Close the window.
-      this.set("visible", false);
     }
   }
   

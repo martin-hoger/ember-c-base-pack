@@ -16,7 +16,7 @@ export default Ember.Mixin.create({
     // It is not possible to define computed property with variable in it.
     // If sort by is defined, we can sort.
     Ember.defineProperty(this, 'rowsSorted', 
-      Ember.computed("rows.@each." + this.get("sortBy"), 'sortBy', function(){
+      Ember.computed("rows.@each." + this.get("sortBy"), 'rows.length', 'sortBy', function(){
         var sortBy = this.get("sortBy");
         var rows = sortBy ? this.get("rows").sortBy(sortBy) : this.get("rows");
         if (this.get("sortReverse")) {
