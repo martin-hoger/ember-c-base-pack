@@ -24,7 +24,6 @@ export default Ember.Component.extend({
   // default values:
   colorTrue         : '#58ac43',   // semntic ui green
   colorFalse        : '#e8e8e8',   // semantic ui gray
-  // textColor         : "#ffffff",   // white
   textTrue          : 'Aktivní',
   textFalse         : 'Pasivní',
   trueTextColor     : '#ffffff',   // white
