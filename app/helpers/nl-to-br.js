@@ -1,9 +1,10 @@
 import Ember from 'ember';
 
 export function nlToBr(params) {
-  var breakTag = '<br />';
-  //Replace \n to break tag.
-  return params[0].split('\n').join(breakTag);
+  var text = params[0];
+  text = Ember.Handlebars.Utils.escapeExpression(text);
+  text = text.replace(/(\r\n|\n|\r)/gm, '<br />');
+  return new Ember.Handlebars.SafeString(text);
 }
 
 export default Ember.Helper.helper(nlToBr);
