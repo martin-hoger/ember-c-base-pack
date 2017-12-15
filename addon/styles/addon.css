@@ -11,5 +11,8 @@ body.loading #loader   { display: block; }
 /* Iframe box */
 .iframe-box { background: transparent url(../ember-c-base-pack/loader-iframe.gif) no-repeat 50% 100px; }
 
+/* Avatar box */
+.avatar-box               { vertical-align: middle; display: inline-block; overflow: hidden; }
+.avatar-box.rounded > img { -webkit-border-radius: 50%; -moz-border-radius: 50%; border-radius: 50%; }
 
 
