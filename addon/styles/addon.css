@@ -15,4 +15,8 @@ body.loading #loader   { display: block; }
 .avatar-box               { vertical-align: middle; display: inline-block; overflow: hidden; }
 .avatar-box.rounded > img { -webkit-border-radius: 50%; -moz-border-radius: 50%; border-radius: 50%; }
 
+/* Split box */
+.split-window-double        { position: absolute; bottom: 0; left: 0; right: 0; }
+.split-window-double > .win { position: absolute; bottom: 0; top: 0; overflow: hidden; overflow-y: auto; }
+
 
