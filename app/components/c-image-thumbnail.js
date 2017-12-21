@@ -5,7 +5,7 @@ export default Ember.Component.extend({
   attributeBindings : ['style'],
   height            : 100,
   width             : 100,
-  backgroundSize    : 'cover';
+  backgroundSize    : 'cover',
 
   style: Ember.computed('height', 'width', 'resolvedUrl', 'rounded', function() {
     // console.log('height: ', this.get('height'));
