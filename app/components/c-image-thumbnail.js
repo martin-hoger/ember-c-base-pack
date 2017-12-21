@@ -1,16 +1,18 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  classNames: ['image-thumbnail'],
-  attributeBindings: ['style'],
-  height: 100,
-  width: 100,
+  classNames        : ['image-thumbnail'],
+  attributeBindings : ['style'],
+  height            : 100,
+  width             : 100,
+  backgroundSize    : 'cover';
 
   style: Ember.computed('height', 'width', 'resolvedUrl', 'rounded', function() {
     // console.log('height: ', this.get('height'));
-    var height = this.get('height');
-    var width = this.get('width');
-    var resolvedUrl = this.get('resolvedUrl');
+    var height         = this.get('height');
+    var width          = this.get('width');
+    var backgroundSize = this.get('backgroundSize');
+    var resolvedUrl    = this.get('resolvedUrl');
     var styleStr ;
     var roundedVal;
 
@@ -21,7 +23,7 @@ export default Ember.Component.extend({
       roundedVal = 0;
     }
 
-    styleStr = `background-image: url(${resolvedUrl}); background-size: cover; border-radius: ${roundedVal}%; height: ${height}px; width: ${width}px`;
+    styleStr = `background-image: url(${resolvedUrl}); background-size: ${backgroundSize}; border-radius: ${roundedVal}%; height: ${height}px; width: ${width}px; background-repeat: no-repeat;`;
     //toto vrátí objekt:
     return Ember.String.htmlSafe(styleStr);
   }),
