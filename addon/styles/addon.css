@@ -8,6 +8,9 @@ body.loading #loader   { display: block; }
 .partial-overlay-overlay { background: rgba(0, 0, 0, 0.1);position: fixed;top: 0;left: 0px;right: 0;bottom: 0;z-index: 9; pointer-events: none; }
 .partial-overlay-close   { position: absolute;top: 15px;right: 20px;font-size: 40px !important;cursor: pointer;}
 
+/* Image thumbnail */
+.image-thumbnail { display: inline-block; vertical-align: middle; }
+
 /* Iframe box */
 .iframe-box { background: transparent url(../ember-c-base-pack/loader-iframe.gif) no-repeat 50% 100px; }
 
