@@ -23,7 +23,7 @@ export default Ember.Component.extend({
       roundedVal = 0;
     }
 
-    styleStr = `background-image: url(${resolvedUrl}); background-size: ${backgroundSize}; border-radius: ${roundedVal}%; height: ${height}px; width: ${width}px; background-repeat: no-repeat;`;
+    styleStr = `background: transparent url(${resolvedUrl}) no-repeat 50% 50%; background-size: ${backgroundSize}; border-radius: ${roundedVal}%; height: ${height}px; width: ${width}px;`;
     //toto vrátí objekt:
     return Ember.String.htmlSafe(styleStr);
   }),

@@ -13,7 +13,7 @@ Usage in .hbs:
 
 import { helper } from "@ember/component/helper";
 
-export function colorByIndex([index, pallete]) {
+export function colorByIndex([index, pallete, seed]) {
   const palleteDefinitions = {
     "default" : [
       '#7D4900',
@@ -35,6 +35,8 @@ export function colorByIndex([index, pallete]) {
     ]
   };
 
+  seed = !seed ? 0 : seed;
+
   var colors;
   if (palleteDefinitions[pallete] === undefined) {
     // If pallete is not defined or is not defined right => use default
@@ -51,7 +53,7 @@ export function colorByIndex([index, pallete]) {
     index==16 => color[0]
     index==17 => color[1]
   */
-  return colors[index % colors.length];
+  return colors[(index + seed) % colors.length];
 }
 
 export default helper(colorByIndex);
