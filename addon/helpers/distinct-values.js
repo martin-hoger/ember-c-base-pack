@@ -37,60 +37,40 @@ highlights : Ember.computed('rowsFiltered', function() {
 import Ember from 'ember';
 
 export function distinctValues(params) {
-  var items = params[0];
+  var items = params[0];  // = articles
   var propertyName = params[1];
-  // var sortByValue = params[2];
   var itemsArray = { 'values' : [], 'valuesWithCounts' : [] };
 
-  console.log(items);
-  console.log(propertyName);
-  // console.log(sortByValue);
-
   items.forEach(function(item) {
-    // create array items with this propertyName:
     var properties = item.get(propertyName);
-    console.log('property u článku', properties);
-    // skip and don't count, when properties are undefined (some article highlights are undefined)
+    // skip and don't count, when properties are undefined (some article has undefined highlights)
     if (properties) {
       // some properties are array, some not, so unified it
       if (!Ember.isArray(properties)) {
         properties = [properties]
       }
-      properties.forEach((property) => {
-        console.log('property po forEach', property);
-        // find item with this id:
-        // var valuesWithCounts = itemsArray.get('valuesWithCounts'); nefunguje, proč?
+      properties.forEach(function(property){
+        // find item with this property:
         var valuesWithCounts = itemsArray.valuesWithCounts;
-        // var propertyArrayItem = itemsArray.get('valuesWithCounts').findBy('property', property);
         var propertyArrayItem = valuesWithCounts.findBy('value', property);
 
-        if (!propertyArrayItem)  {  // item with this id not yet included, so add
+        if (!propertyArrayItem)  {  // item with this property not yet included, so add
           propertyArrayItem = {'value': property, 'count': 0};
-
-          // console.log('propertyArrayItem', propertyArrayItem);
           itemsArray.valuesWithCounts.push(propertyArrayItem);
-          //itemsArray.valuesWithCounts.push({'value': property, 'count': 0});
-
-          // console.log('itemsArray', itemsArray);
         }
         // increment number of objects:
-
         propertyArrayItem.count++;
       });
-  }
+    }
 
   });
-   // sort by count from highest to lowest
-   itemsArray.valuesWithCounts = itemsArray.valuesWithCounts.sortBy('count').reverse() ;
 
-  //go through valuesWithCounts and create value array [ 1, 3, 5...]
+  // sort created array by count from highest to lowest
+  itemsArray.valuesWithCounts = itemsArray.valuesWithCounts.sortBy('count').reverse() ;
+  //go through valuesWithCounts and create pure value array [ 1, 3, 5...]
   itemsArray.valuesWithCounts.forEach(function(object){
-    // console.log('1 řádka', object);
     itemsArray.values.push(object.value)
-    // console.log('itemsArray.values', itemsArray.values);
   })
-
-  console.log(itemsArray);
 
   return itemsArray;
 }
