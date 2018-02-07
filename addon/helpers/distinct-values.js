@@ -43,8 +43,9 @@ export function distinctValues(params) {
 
   items.forEach(function(item) {
     var properties = item.get(propertyName);
-    // skip and don't count, when properties are undefined (some article has undefined highlights)
-    if (properties) {
+    // skip and don't count, when properties are undefined
+    // (some article has undefined highlights). But article status is true/false so we must test != undefined
+    if (properties != undefined) {
       // some properties are array, some not, so unified it
       if (!Ember.isArray(properties)) {
         properties = [properties]
