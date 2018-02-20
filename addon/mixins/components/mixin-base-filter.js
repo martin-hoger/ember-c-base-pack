@@ -24,7 +24,7 @@ export default Ember.Mixin.create({
         var sortBy = this.get('sortBy');
         var rows = sortBy ? this.get('rows').sortBy(sortBy) : this.get('rows');
         if (this.get('sortReverse')) {
-          rows.reverse();
+          rows.reverseObjects();
         }
         return rows;
       })

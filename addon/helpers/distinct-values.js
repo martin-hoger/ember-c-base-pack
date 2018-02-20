@@ -66,7 +66,7 @@ export function distinctValues(params) {
   });
 
   // sort created array by count from highest to lowest
-  itemsArray.valuesWithCounts = itemsArray.valuesWithCounts.sortBy('count').reverse() ;
+  itemsArray.valuesWithCounts = itemsArray.valuesWithCounts.sortBy('count').reverseObjects() ;
   //go through valuesWithCounts and create pure value array [ 1, 3, 5...]
   itemsArray.valuesWithCounts.forEach(function(object){
     itemsArray.values.push(object.value)

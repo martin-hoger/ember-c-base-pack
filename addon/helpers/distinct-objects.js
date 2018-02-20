@@ -63,7 +63,7 @@ export function distinctObjects(params) {
   if (sortByProperty) {
     itemsArray = itemsArray.sortBy(sortByProperty);
   } else {
-    itemsArray = itemsArray.sortBy('distinctObjectsCount').reverse();
+    itemsArray = itemsArray.sortBy('distinctObjectsCount').reverseObjects();
   }
 
   return itemsArray;
