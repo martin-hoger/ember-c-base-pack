@@ -1,8 +1,9 @@
 /*
 
-distinctValues(items, propertyName)
+distinctValues(items, propertyName, true)
 inputs: items(array of objects) you want to go through
         propertyName(string) you want to test
+        optional 'true' if you want to count items with undefined property
         the array is sorted by count (from highest number to lowest)
 output: object like this, saved number of occurrences of this property in .count:
 { 'values': [ 1, 3, 4...],
@@ -32,28 +33,32 @@ highlights : Ember.computed('rowsFiltered', function() {
   return distinctValues([rowsFiltered, 'highlight']);
 }),
 
+if you want also count articles with undefined type:
+return distinctValues([rowsFiltered, 'type', true]);
+
 */
 
-import Ember from 'ember';
+import { helper } from '@ember/component/helper';
 
 export function distinctValues(params) {
   var items = params[0];  // = articles
   var propertyName = params[1];
+  var countUndefined = params[2];
   var itemsArray = { 'values' : [], 'valuesWithCounts' : [] };
 
   items.forEach(function(item) {
     var properties = item.get(propertyName);
     // skip and don't count, when properties are undefined
     // (some article has undefined highlights). But article status is true/false so we must test != undefined
-    if (properties != undefined) {
+    if (properties != undefined || countUndefined) {
       // some properties are array, some not, so unified it
       if (!Ember.isArray(properties)) {
         properties = [properties]
       }
       properties.forEach(function(property){
         // find item with this property:
-        var valuesWithCounts = itemsArray.valuesWithCounts;
-        var propertyArrayItem = valuesWithCounts.findBy('value', property);
+        let valuesWithCounts = itemsArray.valuesWithCounts;
+        let propertyArrayItem = valuesWithCounts.findBy('value', property);
 
         if (!propertyArrayItem)  {  // item with this property not yet included, so add
           propertyArrayItem = {'value': property, 'count': 0};
@@ -76,4 +81,4 @@ export function distinctValues(params) {
   return itemsArray;
 }
 
-export default Ember.Helper.helper(distinctValues);
+export default helper(distinctValues);

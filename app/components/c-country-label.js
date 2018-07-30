@@ -14,10 +14,13 @@ import { getNames } from 'ember-i18n-iso-countries';
 
 export default Ember.Component.extend({
 
-  language : 'en',
-  country  : null, //inserted by user as a component imput
+  classNames        : ['pokusak', 'dalsi'],
+  language  : 'en',
+  country   : null, //inserted by user as a component imput
+  // classNames: ['country-label'],
 
   countryName: Ember.computed('language', 'country', function() {
+    console.log('kuk', this.get('classNames'));
     return getNames('en')[this.get('country')];
   }),
 
