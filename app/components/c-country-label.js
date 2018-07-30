@@ -9,18 +9,17 @@
   {{c-country-label country="ES"}}
 */
 
-import Ember from 'ember';
+import Component from '@ember/component';
+import { computed } from '@ember/object';
 import { getNames } from 'ember-i18n-iso-countries';
 
-export default Ember.Component.extend({
+export default Component.extend({
 
-  classNames        : ['pokusak', 'dalsi'],
   language  : 'en',
   country   : null, //inserted by user as a component imput
-  // classNames: ['country-label'],
+  classNames: ['country-label'],
 
-  countryName: Ember.computed('language', 'country', function() {
-    console.log('kuk', this.get('classNames'));
+  countryName: computed('language', 'country', function() {
     return getNames('en')[this.get('country')];
   }),
 
