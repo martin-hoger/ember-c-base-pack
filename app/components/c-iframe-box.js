@@ -1,5 +1,6 @@
 import Component from '@ember/component';
 import { scheduleOnce } from '@ember/runloop';
+import { schedule } from '@ember/runloop';
 
 export default Component.extend({
 
@@ -23,10 +24,12 @@ export default Component.extend({
       });
 
       // Adjust the width of iframe.
-      $iframe.on('load', function(){
-        var $body      = $iframe.contents().find('body');
-        var skipEvent = false;
+      $iframe.on('DOMContentLoaded load', function(){
+        var $body = $iframe.contents().find('body');
+        // First resize on load.
+        thisClass.resizeIframe($iframe, $body);
         // Fire when tree is modified.
+        var skipEvent = false;
         $body.on('DOMSubtreeModified click keydown mousemove', function() {
           //We use timeout here not to perform all the time
           //when the event is fired.
@@ -35,21 +38,29 @@ export default Component.extend({
           }
           skipEvent = true;
           setTimeout(function() {
-            var bodyHeight = $body.height();
-            var minHeight  = $iframe.data('min-height');
-            // If there is set some min height,
-            // force the iframe to be at least min height.
-            if (!isNaN(minHeight) && bodyHeight < minHeight) {
-              bodyHeight = minHeight;
-            }
-            $iframe.height(bodyHeight + 5);
+            thisClass.resizeIframe($iframe, $body);
             skipEvent = false;
           }, 200);
         });
-        $body.trigger('DOMSubtreeModified');
       });
 
     });
+  },
+
+  // Resizes the iframe.
+  resizeIframe($iframe, $body) {
+    // https://stackoverflow.com/questions/49055400/use-of-ember-run-loop
+    schedule('afterRender', () => {
+      var bodyHeight = $body.height();
+      var minHeight  = $iframe.data('min-height');
+      // If there is set some min height,
+      // force the iframe to be at least min height.
+      if (!isNaN(minHeight) && bodyHeight < minHeight) {
+        bodyHeight = minHeight;
+      }
+      $iframe.height(bodyHeight);
+    });
   }
+
 
 });
