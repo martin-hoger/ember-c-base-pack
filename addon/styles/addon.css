@@ -12,7 +12,7 @@ body.loading #loader   { display: block; }
 .image-thumbnail { display: inline-block; vertical-align: middle; }
 
 /* Iframe box */
-.iframe-box { background: transparent url(../ember-c-base-pack/loader-iframe.gif) no-repeat 50% 100px; }
+.iframe-box { background: transparent url(../ember-c-base-pack/loader-iframe.gif) no-repeat 50% 50%; overflow: hidden; width: 100%; min-height: 100px; border: 0px; }
 
 /* Avatar box */
 .avatar-box               { vertical-align: middle; display: inline-block; overflow: hidden; }
