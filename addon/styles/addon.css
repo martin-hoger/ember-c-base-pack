@@ -22,4 +22,6 @@ body.loading #loader   { display: block; }
 .split-window-double        { position: absolute; bottom: 0; left: 0; right: 0; }
 .split-window-double > .win { position: absolute; bottom: 0; top: 0; overflow: hidden; overflow-y: auto; }
 
-
+/* c-country-label - Flag and country label */
+.country-label                               { display: inline-block;}
+.country-label > .flag32                     { vertical-align: middle; position: relative; top: -2px;}
