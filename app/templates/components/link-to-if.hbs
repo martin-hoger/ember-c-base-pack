@@ -1,0 +1,16 @@
+{{#if condition}}
+  {{#link-to params=_params.linkToParams}}
+    {{yield}}
+  {{/link-to}}
+{{else}}
+  {{yield}}
+{{/if}}
+
+
+{{!-- {{#if _params.condition}}
+  {{#link-to params=_params.linkToParams}}
+    {{yield}}
+  {{/link-to}}
+{{else}}
+  {{yield}}
+{{/if}} --}}
