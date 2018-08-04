@@ -1,16 +1,9 @@
 {{#if condition}}
-  {{#link-to params=_params.linkToParams}}
+  {{#link-to params=params}}
     {{yield}}
   {{/link-to}}
 {{else}}
-  {{yield}}
+  {{#if show}}
+    {{yield}}
+  {{/if}}
 {{/if}}
-
-
-{{!-- {{#if _params.condition}}
-  {{#link-to params=_params.linkToParams}}
-    {{yield}}
-  {{/link-to}}
-{{else}}
-  {{yield}}
-{{/if}} --}}
