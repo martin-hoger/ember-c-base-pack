@@ -2,6 +2,7 @@
 Changed {{link-to}}:
 If condition==true, enable a link
 if show==true, show the text, even if condition is false
+Passing also class and replace to link-to
 ========================================================
 
 According to:
@@ -13,7 +14,7 @@ Usage:
  this text will be visible and link active <br/>
 {{/link-to-if}}
 
-{{#link-to-if condition=false show=true params=(array "application.admin.stats.stat" "videos") }}
+{{#link-to-if condition=false show=true params=(array "application.admin.stats.stat" "videos") class="my-special" replace=true }}
   this text will be visible, but without link<br/>
 {{/link-to-if}}
 
