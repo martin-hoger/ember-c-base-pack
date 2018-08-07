@@ -1,6 +1,6 @@
-{{#if isPending}}
-  <div class="loading-block-loader"></div>
-{{else}}
+{{#if isLoaded}}
   {{yield}}
+{{else}}
+  <div class="loading-block-loader"></div>
 {{/if}}
 

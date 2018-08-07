@@ -1,23 +1,27 @@
 import Component from '@ember/component';
-import { computed } from '@ember/object';
+import RSVP from 'rsvp';
 
 export default Component.extend({
 
+  isLoaded : false,
+
   /**
-   * Computed property for all models.
-   * Expect array as we want to show, the might be more models we are waiting for.
+   * This component waits (shows loaded) until the data are resolved.
+   * Better way is to use RSVP hash at the router at the model().
    *
+   * {{#c-loading-block model=model}}
+   *    {{model.client.name}}
+   * {{/c-loading-block}}
    */
-  isPending: computed('models.@each.isPending', function () {
-    var models    = this.get('models');
-    var isPending = false;
-    models.forEach(function (model) {
-      if (model.get('isPending')) {
-        isPending = true;
-      }
+  init() {
+    this._super(...arguments);
+
+    RSVP.hash(this.get('model')).then((resolvedModel) => {
+      this.set('model', resolvedModel);
+      this.set('isLoaded', true);
     });
-    return isPending;
-  }),
+  },
+
 
 });
 
