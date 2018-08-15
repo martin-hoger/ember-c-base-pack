@@ -1,9 +1,7 @@
 {{#if visible}}
-  <div class="partial-overlay">
-    <div class="partial-overlay-content">
-      <i class="partial-overlay-close remove circle icon" onclick={{action "close"}}></i>
-      {{yield}}
-    </div>
+  <div class="partial-overlay-content">
+    <i class="partial-overlay-close remove circle icon" onclick={{action "close"}}></i>
+    {{yield}}
   </div>
   <div class="partial-overlay-overlay"></div>
 {{/if}}
