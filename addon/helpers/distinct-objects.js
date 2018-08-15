@@ -11,6 +11,10 @@ inputs: - items(array of objects) you want to go through
 output: array of propertyName objects, also counts the number of occurrences
 of this property in distinctObjectsCount.
 
+NOTE: 
+ * this helper works only with Ember objects
+ * working with undefined values works only for object with relationship
+
 -----------------------------
 
 Example of use for making array of users in showen articles (rowsFiltered)
@@ -40,8 +44,9 @@ supporterNames : computed('rowsFiltered.@each.supporter', function() {
 
 */
 
-import Ember from 'ember';
 import EmberObject from '@ember/object';
+import { isArray } from '@ember/array';
+import { helper } from '@ember/component/helper';
 
 export function distinctObjects(params) {
   var items = params[0];
@@ -59,33 +64,29 @@ export function distinctObjects(params) {
     // if it's not an array, make it. Because then we can use another forEach
     // and doesn't matter, if there is only one object, or more objects
     // 1 user of the article VS. many categories of the article
-    if (!Ember.isArray(objects)) {
+    if (!isArray(objects)) {
       objects = [objects]
     }
     objects.forEach(function(object){
-      // find item with this id:
+      // Object is empty/not-defined and we do not count undefined object, skip this item.
+      var isDefined = object.get('id') ? true : false;
+      if (!isDefined && !countUndefined) { 
+        return;
+      }
+      // Find item with this id.
       var propertyArrayItem = itemsArray.findBy('id', object.get('id'));
-      if (!propertyArrayItem)  {  // item with this id not yet included, so add
-        if (!object.get('id') && countUndefined) {
-          // object is empty and we should count undefined, so create the object and fill it
+      // If the item with this id is not yet included, add it.
+      if (!propertyArrayItem)  {  
+        // If the object is undefined, we create an object representing the undefined value 
+        // (we can then set distinctObjectsCount for the undefined values).
+        if (!isDefined) {
           object = emptyObject.create();
-          propertyArrayItem = object;
-          propertyArrayItem.set('distinctObjectsCount', 0);  // number will be counted
-          itemsArray.push(propertyArrayItem);
-        } else {
-          if (object.get('id') ) { // object is not empty
-            propertyArrayItem = object;
-            propertyArrayItem.set('distinctObjectsCount', 0);  // number will be counted
-            itemsArray.push(propertyArrayItem);
-          }
-
         }
-
+        propertyArrayItem = object;
+        propertyArrayItem.set('distinctObjectsCount', 0);  // number will be counted
+        itemsArray.push(propertyArrayItem);
       }
-      // increment number of objects (only if object exists):
-      if (propertyArrayItem) {
-        propertyArrayItem.incrementProperty('distinctObjectsCount');
-      }
+      propertyArrayItem.incrementProperty('distinctObjectsCount');
     });
   });
 
@@ -98,4 +99,4 @@ export function distinctObjects(params) {
   return itemsArray;
 }
 
-export default Ember.Helper.helper(distinctObjects);
+export default helper(distinctObjects);
