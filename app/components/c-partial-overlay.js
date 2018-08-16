@@ -1,56 +1,69 @@
+/*
+Possible to create multiple overlay windows. If second overlay is opened from first
+overlay, new one has 'maxLeft' position and fist is moved left by computed
+property. If third is opened from second, third has again 'maxLeft' position and
+1. - 2. are moved to 100 and 200 px left. Nice :-)
+  - if (vissible == false) { class="hidden" is added to the element }
+  - maxLength is the possition of the last opened overlay, default 300px.
+
+Usage:
+{{#c-partial-overlay visible=true onClose=(route-action "closeWindow")}}
+  This is overlay 2
+  {{#link-to 'application.c-form-test.over1.over2.over3'}}
+    This is a link to overlay 3
+  {{/link-to}}
+  {{outlet}}
+{{/c-partial-overlay}}
+
+*/
+
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 import { htmlSafe } from '@ember/string';
+import { scheduleOnce } from '@ember/runloop';
 
 export default Component.extend({
 
-  // tagName: 'div',
-  // attributeBindings: ['style'],
-  // classNameBindings: ['visible::hidden'],
-  visible    : true,
+  classNameBindings: ['visible::hidden'],
+  visible          : true,
+  maxLeft          : 300,
 
-  // didInsertElement() {
+  // Create the global array of overlay IDs.
+  // scheduleOnce() must be used. Otherwise the order of application style: computed()
+  // can be not from parent to child, but from child to parent (in some cases)
+  // and
   init() {
     this._super(...arguments);
-    // debugger;
-    var overlayId = this.set('overlayId', Math.random() );
-    console.log('overlay id:', this.get('overlayId'));
-    if (!this.get('session.cPartialoverlayIds') ) {
-      this.set('session.cPartialoverlayIds', []);
-      console.log('session.cPartialoverlayIds', this.get('session.cPartialoverlayIds') );
-    }
-    var overlayIds = this.get('session.cPartialoverlayIds');
-    overlayIds.pushObject(overlayId);
-    console.log('overlayIds', overlayIds);
-
+    scheduleOnce('afterRender', this, function() {
+      // Global array already exists?
+      if (!this.get('session.cPartialoverlayIds') ) {
+        this.set('session.cPartialoverlayIds', []);
+      }
+      var overlayId = this.set('overlayId', Math.random() ); // random id of this new overlay
+      var overlayIds = this.get('session.cPartialoverlayIds');
+      overlayIds.pushObject(overlayId); // add actual overlay to the existing array
+    });
   },
 
-  willDestroyElement() {
-    // má tam tohle být ?????????????????
+  // overlay id must be removed AFTER element was destroyed, otherwise
+  // we receive Ember error "Assertion Failed: You modified "style" twice...
+  // See https://github.com/emberjs/ember.js/issues/13948 for more details."
+  didDestroyElement() {
     this._super(...arguments);
-    // debugger;
-    console.log('destroy session.cPartialoverlayIds', this.get('session.cPartialoverlayIds') );
-    console.log('toto id', this.get('overlayId'));
-
     var overlayIds = this.get('session.cPartialoverlayIds');
     overlayIds.removeObject(this.get('overlayId') );
-
-    console.log('destroy na konci session.cPartialoverlayIds', this.get('session.cPartialoverlayIds') );
-
   },
 
   style: computed('session.cPartialoverlayIds.[]', function() {
     var overlayId = this.get('overlayId');
-    // debugger;
-    console.log('computed, id:', overlayId);
     var overlayIds = this.get('session.cPartialoverlayIds');
-    var index = overlayIds.indexOf(overlayId);
-    var left = 300 / (overlayIds.length - index)
+    var left = this.get('maxLeft');
+    if (overlayIds) {
+      var index = overlayIds.indexOf(overlayId);
+      left = left / overlayIds.length * (index + 1);
+    }
 
-    var styleStr = `left: ${left}px`;
-
-    return htmlSafe(styleStr);
-
+    return htmlSafe(`left: ${left}px`);
   }),
 
   actions: {
