@@ -1,13 +1,14 @@
-import Ember from 'ember';
+import Service from '@ember/service';
+import $ from 'jquery';
 
-export default Ember.Service.extend({
+export default Service.extend({
 
   show: function () {
-    Ember.$('body').addClass('loading');
+    $('body').addClass('loading');
   },
 
   hide: function () {
-    Ember.$('body').removeClass('loading');
+    $('body').removeClass('loading');
   }
 
 });
