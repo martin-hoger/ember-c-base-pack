@@ -1,5 +1,5 @@
 /* Partial overview */
-.partial-overlay         { background: #fff;position: fixed;top: 0;right: 0;bottom: 0;z-index: 10; }
+.partial-overlay         { background: #fff; position: fixed; top: 0; right: 0; bottom: 0; z-index: 10; -moz-transition: all 0.3s ease-out; -webkit-transition: all 0.3s ease-out; -o-transition: all 0.3s ease-out; -ms-transition: all 0.3s ease-out; transition: all 0.3s ease-out; }
 .partial-overlay-content { position: absolute; top: 90px; left: 50px; right: 50px; bottom: 50px; overflow-x: visible;overflow-y: auto; padding: 20px}
 .partial-overlay-overlay { background: rgba(0, 0, 0, 0.1);position: fixed;top: 0;left: 0px;right: 0;bottom: 0;z-index: 9; pointer-events: none; }
 .partial-overlay-close   { position: absolute;top: 15px;right: 20px;font-size: 40px !important;cursor: pointer;}

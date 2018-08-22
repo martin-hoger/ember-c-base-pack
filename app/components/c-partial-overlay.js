@@ -27,6 +27,7 @@ export default Component.extend({
   classNameBindings: ['visible::hidden'],
   visible          : true,
   maxLeft          : 300,
+  collapsed        : false,
 
   // Create the global array of overlay IDs.
   // scheduleOnce() must be used. Otherwise the order of application style: computed()
@@ -54,25 +55,39 @@ export default Component.extend({
     overlayIds.removeObject(this.get('overlayId') );
   },
 
-  style: computed('session.cPartialoverlayIds.[]', function() {
+  // Generate style according number of overlays.
+  style: computed('session.cPartialoverlayIds.[]', 'collapsed', function() {
+    var styles    = [];
     var overlayId = this.get('overlayId');
     var overlayIds = this.get('session.cPartialoverlayIds');
-    var left = this.get('maxLeft');
+
+    // Set width for multiple windows.
+    var width = 80;
     if (overlayIds) {
       var index = overlayIds.indexOf(overlayId);
-      left = left / overlayIds.length * (index + 1);
+      width = 100 - 20 / overlayIds.length * (index + 1);
     }
+    styles.push(`width: ${width}%`);
 
-    return htmlSafe(`left: ${left}px`);
+    if (this.get('collapsed')) {
+      // styles.push('transform: perspective(980px) translate(0px, 0px) rotateY(-45deg)');
+      // styles.push('transform: perspective(800px) translate(0px, 0px) rotateY(-10deg)');
+      // styles.push('transform: translate(0px, 0px)');
+      styles.push('right: -40%');
+    }
+    // styles.push('transform-origin: 100% 50%;');
+
+
+    return htmlSafe(styles.join(';'));
   }),
 
   actions: {
+    // If there is onClose action, fire the function.
     close() {
-      // If there is onClose action, fire the function.
       if (this.get('onClose')) {
         this.get('onClose')();
       }
-    }
+    },
   }
 
 });
