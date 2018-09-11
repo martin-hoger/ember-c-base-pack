@@ -23,8 +23,8 @@ import { htmlSafe } from '@ember/string';
 import { scheduleOnce } from '@ember/runloop';
 
 export default Component.extend({
-
-  classNameBindings: ['visible::hidden'],
+  classNames : ['partial-overlay-wrap'],
+  classNameBindings: ['visible::hidden', 'onmouse:focused:blurred'],
   visible          : true,
   maxLeft          : 300,
   collapsed        : false,
@@ -88,6 +88,10 @@ export default Component.extend({
         this.get('onClose')();
       }
     },
+
+    contentFocused(focused) {
+      this.set('onmouse', focused);
+    }
   }
 
 });
