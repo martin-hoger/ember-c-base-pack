@@ -114,7 +114,7 @@ export default Component.extend({
           if (!this.get('mouseOnContent')) {
             this.set('focused', false);
           }
-        }), 1000);
+        }), 300);
       }
 
     }
