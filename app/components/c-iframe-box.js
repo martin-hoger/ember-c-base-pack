@@ -6,14 +6,22 @@ export default Component.extend({
 
   tagName           : 'iframe',
   classNames        : ['iframe-box'],
-  attributeBindings : ['src', 'scrolling'],
+  attributeBindings : ['src', 'scrolling', 'height'],
   scrolling         : 'no',
+
+  height            : null,
 
   // When the component is inserted, add listener for the messages.
   didInsertElement() {
     this._super(...arguments);
     var thisClass = this;
     var $iframe   = this.$();
+
+    var height = this.get('height');
+    if (height) {
+      return;
+    }
+
     scheduleOnce('afterRender', this, function() {
 
       // On message fire event.
