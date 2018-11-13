@@ -8,7 +8,6 @@ export default Component.extend({
   classNames        : ['iframe-box'],
   attributeBindings : ['src', 'scrolling', 'height'],
   scrolling         : 'no',
-
   height            : null,
 
   // When the component is inserted, add listener for the messages.
@@ -16,11 +15,6 @@ export default Component.extend({
     this._super(...arguments);
     var thisClass = this;
     var $iframe   = this.$();
-
-    var height = this.get('height');
-    if (height) {
-      return;
-    }
 
     scheduleOnce('afterRender', this, function() {
 
@@ -30,6 +24,13 @@ export default Component.extend({
           thisClass.attrs.onMessage(actionName, actionValue);
         }
       });
+
+      // If 'height' passed, set iframe height and finish.
+      var height = this.get('height');
+      if (height) {
+        $iframe.height(height);
+        return;
+      }
 
       // Adjust the width of iframe.
       $iframe.on('DOMContentLoaded load', function(){
