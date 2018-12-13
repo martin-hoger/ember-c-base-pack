@@ -21,6 +21,7 @@ body.loading #loading-bar { display: block; }
 /* Iframe box */
 .loading-block-loader,
 .iframe-box { background: transparent url(../ember-c-base-pack/loading.svg) no-repeat 50% 50%; background-size: 150px auto; overflow: hidden; width: 100%; min-height: 130px; border: 0px; }
+.iframe-box.loaded { background: transparent; }
 
 /* Avatar box */
 .avatar-box               { vertical-align: middle; display: inline-block; overflow: hidden; }
