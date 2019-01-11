@@ -6,9 +6,11 @@ export default Component.extend({
 
   tagName           : 'iframe',
   classNames        : ['iframe-box'],
+  classNameBindings : ['loaded:loaded:'],
   attributeBindings : ['src', 'scrolling', 'height'],
   scrolling         : 'no',
   height            : null,
+  loaded            : false,
 
   // When the component is inserted, add listener for the messages.
   didInsertElement() {
@@ -37,6 +39,7 @@ export default Component.extend({
         var $body = $iframe.contents().find('body');
         // First resize on load.
         thisClass.resizeIframe($iframe, $body);
+        thisClass.set('loaded', true);
         // Fire when tree is modified.
         var skipEvent = false;
         $body.on('DOMSubtreeModified click keydown mousemove', function() {

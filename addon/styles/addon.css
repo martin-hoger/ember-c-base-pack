@@ -19,8 +19,11 @@ body.loading #loading-bar { display: block; }
 #loading-bar { display: none; background: #ffffff9e url(../ember-c-base-pack/loading.svg) no-repeat 50% 50%; background-size: 150px auto; min-height: 200px; position: fixed; top: 50%; margin: -100px auto 0; z-index: 10000; border-radius: 50%; width: 200px; left: 0; right: 0; }
 
 /* Iframe box */
+.wait-block,
 .loading-block-loader,
 .iframe-box { background: transparent url(../ember-c-base-pack/loading.svg) no-repeat 50% 50%; background-size: 150px auto; overflow: hidden; width: 100%; min-height: 130px; border: 0px; }
+.wait-block.loaded,
+.iframe-box.loaded { background: transparent; }
 
 /* Avatar box */
 .avatar-box               { vertical-align: middle; display: inline-block; overflow: hidden; }
