@@ -1,7 +1,9 @@
-import Ember from 'ember';
+import Mixin from '@ember/object/mixin';
 import { convertAccentedCharacters } from 'ember-c-base-pack/helpers/convert-accented-characters';
+import { computed } from '@ember/object';
+import { defineProperty } from '@ember/object';
 
-export default Ember.Mixin.create({
+export default Mixin.create({
 
   // Inputs:
   rows           : [],         // Must contain the input collection. 
@@ -19,21 +21,26 @@ export default Ember.Mixin.create({
     // Define computed property dynamically.
     // It is not possible to define computed property with variable in it.
     // If sort by is defined, we can sort.
-    Ember.defineProperty(this, 'rowsSorted',
-      Ember.computed('rows.@each.' + this.get('sortBy'), 'rows.length', 'sortBy', function(){
-        var sortBy = this.get('sortBy');
-        var rows = sortBy ? this.get('rows').sortBy(sortBy) : this.get('rows');
-        if (this.get('sortReverse')) {
-          rows.reverseObjects();
-        }
-        return rows;
-      })
-    );
-
+    if (this.get('sortBy')) {
+      defineProperty(this, 'rowsSorted',
+        computed('rows.@each.' + this.get('sortBy'), 'rows.[]', 'sortBy', function(){
+          var sortBy = this.get('sortBy');
+          var rows = sortBy ? this.get('rows').sortBy(sortBy) : this.get('rows');
+          if (this.get('sortReverse')) {
+            rows.reverseObjects();
+          }
+          return rows;
+        })
+      );
+    } else {
+      defineProperty(this, 'rowsSorted', 
+        computed('rows.[]', function(){ return this.get('rows'); })
+      );
+    }
   },
 
   // Filtr rows.
-  rowsFiltered: Ember.computed('query', 'rowsSorted.length', function() {
+  rowsFiltered: computed('query', 'rowsSorted.[]', function() {
     var searchQuery = this.get('query');
     if (searchQuery === '' || searchQuery === undefined) {
       return this.get('rowsSorted');
