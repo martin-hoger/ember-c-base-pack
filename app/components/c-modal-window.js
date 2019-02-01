@@ -30,43 +30,13 @@ import { later } from '@ember/runloop';
 
 export default Component.extend({
   classNames : ['modal-window-wrap'],
-  classNameBindings: ['visible::hidden', 'focused:focused:blurred', 'initClass:init-class:'],
+  // classNameBindings: ['visible::hidden', 'focused:focused:blurred', 'initClass:init-class:'],
   visible          : true,
   maxLeft          : 300,
   firstOpen        : true,  // first overlay open => overlay stays left, even if mouse is not on it
   focused          : true,  // first overlay open
   initClass        : true,
-  // Create the global array of overlay IDs.
-  // scheduleOnce() must be used. Otherwise the order of application style: computed()
-  // can be not from parent to child, but from child to parent (in some cases)
-  // init() {
-  //   this._super(...arguments);
-  //   scheduleOnce('afterRender', this, function() {
-  //     // Global array already exists?
-  //     if (!this.get('session.cPartialoverlayIds') ) {
-  //       this.set('session.cPartialoverlayIds', []);
-  //     }
-  //     var overlayId = this.set('overlayId', Math.random() ); // random id of this new overlay
-  //     var overlayIds = this.get('session.cPartialoverlayIds');
-  //     overlayIds.pushObject(overlayId); // add actual overlay to the existing array
-  //   });
-  // },
 
-  // // after inserting element wait and remove init-class => animate move from left to right
-  // didInsertElement() {
-  //   later(( () => {
-  //     this.set('initClass', false);
-  //   }), 1);
-  // },
-
-  // overlay id must be removed AFTER element was destroyed, otherwise
-  // we receive Ember error "Assertion Failed: You modified "style" twice...
-  // See https://github.com/emberjs/ember.js/issues/13948 for more details."
-  // didDestroyElement() {
-  //   this._super(...arguments);
-  //   var overlayIds = this.get('session.cPartialoverlayIds');
-  //   overlayIds.removeObject(this.get('overlayId') );
-  // },
 
   // Generate style according number of overlays.
   style: computed('session.cPartialoverlayIds.[]', function() {
@@ -76,10 +46,10 @@ export default Component.extend({
 
     // Set width for multiple windows.
     var width = 80;
-    if (overlayIds) {
-      var index = overlayIds.indexOf(overlayId);
-      width = 100 - 20 / overlayIds.length * (index + 1);
-    }
+    // if (overlayIds) {
+    //   var index = overlayIds.indexOf(overlayId);
+    //   width = 100 - 20 / overlayIds.length * (index + 1);
+    // }
     styles.push(`width: ${width}%`);
 
     return htmlSafe(styles.join(';'));

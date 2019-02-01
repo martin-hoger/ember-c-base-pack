@@ -1,9 +1,12 @@
 {{#if visible}}
-  <div class="modal-window" style={{style}} onmouseenter={{action "contentFocused" true}}>
+  <div class="modal-window" style={{style}}>
+  {{!-- <div class="modal-window" style={{style}} onmouseenter={{action "contentFocused" true}}> --}}
     <div class="modal-window-content">
+      {{!-- <i class="modal-window-close remove circle icon" click=click></i> --}}
       <i class="modal-window-close remove circle icon" onclick={{action "close"}}></i>
       {{yield}}
     </div>
   </div>
-  <div class="modal-window-overlay" onmouseenter={{action "contentFocused" false}}></div>
+  <div class="modal-window-overlay"></div>
+  {{!-- <div class="modal-window-overlay" onmouseenter={{action "contentFocused" false}}></div> --}}
 {{/if}}
