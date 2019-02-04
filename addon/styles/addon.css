@@ -38,14 +38,10 @@ body.loading #loading-bar { display: block; }
 .country-label > .flag32                     { vertical-align: middle; position: relative; top: -2px;}
 
 /* modal window */
-.modal-window         { background: #fff; position: fixed; top: 50%; left: 50%; bottom: -30%; transform: translate(-50%,-50%); z-index: 10; -moz-transition: all 0.3s ease-out; -webkit-transition: all 0.3s ease-out; -o-transition: all 0.3s ease-out; -ms-transition: all 0.3s ease-out; transition: all 0.3s ease-out; }
-/* ember modal-dialog: */
-/* .modal-window         { top: 50%; left: 50%; transform: translate(-50%,-50%); z-index: 20; position: fixed;border-radius: 8px;background-color: #fff;box-shadow: 0 0 10px #222;padding: 10px;} */
+.modal-window         { background: #fff; position: fixed; top: 50%; left: 50%; bottom: -50%; transform: translate(-50%,-50%); z-index: 10; -moz-transition: all 0.3s ease-out; -webkit-transition: all 0.3s ease-out; -o-transition: all 0.3s ease-out; -ms-transition: all 0.3s ease-out; transition: all 0.3s ease-out; }
 .modal-window-content { position: absolute; top: 50px; left: 50px; right: 50px; bottom: 50px; overflow-x: visible;overflow-y: auto; padding: 20px}
 .modal-window-overlay { background: rgba(0,0,0,.64);position: fixed;top: 0;left: 0px;right: 0;bottom: 0;z-index: 9; }
-.modal-window-close   { position: absolute;top: 15px;right: 20px;font-size: 40px !important;cursor: pointer;}
-.modal-window-wrap.focused.init-class > .partial-overlay  { right: -40%;}
-/* .modal-window-wrap.focused > .partial-overlay             { right: 0%;}
-.modal-window-wrap.blurred > .partial-overlay             { right: -40%;} */
-.modal-window-wrap.blurred > .partial-overlay-overlay     {pointer-events: none;}
-.modal-window-content .field-input-text                   {width: 50%;}
+.modal-window-close   { position: absolute;top: 20px;right: 0;font-size: 40px !important;cursor: pointer;}
+.modal-window-wrap.init-class > .modal-window  { right: -40%;}
+.modal-window-wrap > .modal-window             { right: 0%;}
+.modal-window-content .field-input-text        {width: 50%;}
