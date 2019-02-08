@@ -7,6 +7,9 @@ const Validator = BaseValidator.extend({
     if (!value) {
       return true;
     }
+    if (/^(\+[0-9]{1,6})?[0-9]{9}$/.test(value)) {
+      return true;
+    }
     if (/^(\+[0-9]{1,6} )?[0-9]{3} [0-9]{3} [0-9]{3}$/.test(value)) {
       return true;
     }

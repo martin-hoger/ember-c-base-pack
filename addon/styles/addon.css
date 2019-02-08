@@ -44,4 +44,3 @@ body.loading #loading-bar { display: block; }
 .modal-window-close   { position: absolute;top: 20px;right: 0;font-size: 40px !important;cursor: pointer;}
 .modal-window-wrap.init-class > .modal-window  { right: -40%;}
 .modal-window-wrap > .modal-window             { right: 0%;}
-.modal-window-content .field-input-text        {width: 50%;}
