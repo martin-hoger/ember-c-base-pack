@@ -3,9 +3,12 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   classNames        : ['image-thumbnail'],
   attributeBindings : ['style'],
+  classNameBindings : ['highlighted:highlighted'],
   height            : 100,
   width             : 100,
   backgroundSize    : 'cover',
+  highlighted       : false,
+
 
   style: Ember.computed('height', 'width', 'resolvedUrl', 'rounded', function() {
     // console.log('height: ', this.get('height'));
