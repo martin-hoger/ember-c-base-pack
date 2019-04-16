@@ -1,0 +1,9 @@
+{{#if visible}}
+  <div class="modal-window" style={{style}}>
+    <i class="modal-window-close remove circle icon" onclick={{action "close"}}></i>
+    <div class="modal-window-content">
+      {{yield}}
+    </div>
+  </div>
+  <div class="modal-window-overlay" onclick={{action "close"}}></div>
+{{/if}}

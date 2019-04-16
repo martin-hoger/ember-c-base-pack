@@ -9,9 +9,18 @@ inputs: - items(array of objects) you want to go through
         - optional true for counting objects with undefined property.
         Then the undefined object is { 'name': 'undefined', 'distinctObjectsCount': 10}
 output: array of propertyName objects, also counts the number of occurrences
-of this property in distinctObjectsCount.
+        of this property in distinctObjectsCount.
+        In output .rows we store objects of that property. For example all articles
+        according to input array
+output : [
+  { object of propertyName,
+    distinctObjectsCount: count of this object,
+    rows: [ array of 'items' with this property ]
+  }
+  ... another object of propertyName
+]
 
-NOTE: 
+NOTE:
  * this helper works only with Ember objects
  * working with undefined values works only for object with relationship
 
@@ -70,23 +79,26 @@ export function distinctObjects(params) {
     objects.forEach(function(object){
       // Object is empty/not-defined and we do not count undefined object, skip this item.
       var isDefined = object.get('id') ? true : false;
-      if (!isDefined && !countUndefined) { 
+      if (!isDefined && !countUndefined) {
         return;
       }
       // Find item with this id.
       var propertyArrayItem = itemsArray.findBy('id', object.get('id'));
       // If the item with this id is not yet included, add it.
-      if (!propertyArrayItem)  {  
-        // If the object is undefined, we create an object representing the undefined value 
+      if (!propertyArrayItem)  {
+        // If the object is undefined, we create an object representing the undefined value
         // (we can then set distinctObjectsCount for the undefined values).
         if (!isDefined) {
           object = emptyObject.create();
         }
         propertyArrayItem = object;
         propertyArrayItem.set('distinctObjectsCount', 0);  // number will be counted
-        itemsArray.push(propertyArrayItem);
+        propertyArrayItem.set('rows', []);  // array of objects with this property
+        itemsArray.pushObject(propertyArrayItem);
       }
+      // increment number of objects and insert item object into output
       propertyArrayItem.incrementProperty('distinctObjectsCount');
+      propertyArrayItem.get('rows').pushObject(item);
     });
   });
 

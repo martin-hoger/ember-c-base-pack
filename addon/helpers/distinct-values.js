@@ -4,10 +4,18 @@ distinctValues(items, propertyName, true)
 inputs: items(array of objects) you want to go through
         propertyName(string) you want to test
         optional 'true' if you want to count items with undefined property
-        the array is sorted by count (from highest number to lowest)
-output: object like this, saved number of occurrences of this property in .count:
+output: object like this, saved number of occurrences of this property in .count.
+        Array is sorted by count (from highest number to lowest).
+        In output .rows we store objects of that property. For example all articles
+        according to input array
+output:
 { 'values': [ 1, 3, 4...],
-  'valuesWithCounts' : [ { 'value': 1, 'count': 12 }, { 'value': 3, 'count': 10 }, ...] }
+  'valuesWithCounts' : [
+    { 'value': 1, 'count': 12, 'rows': [ array of 'items' with this property ]},
+    { 'value': 3, 'count': 10, 'rows': [ array of 'items' with this property ]},
+    ...
+  ]
+}
 
 -----------------------------
 
@@ -39,6 +47,7 @@ return distinctValues([rowsFiltered, 'type', true]);
 */
 
 import { helper } from '@ember/component/helper';
+import { isArray } from '@ember/array';
 
 export function distinctValues(params) {
   var items = params[0];  // = articles
@@ -52,7 +61,7 @@ export function distinctValues(params) {
     // (some article has undefined highlights). But article status is true/false so we must test != undefined
     if (properties != undefined || countUndefined) {
       // some properties are array, some not, so unified it
-      if (!Ember.isArray(properties)) {
+      if (!isArray(properties)) {
         properties = [properties]
       }
       properties.forEach(function(property){
@@ -61,11 +70,12 @@ export function distinctValues(params) {
         let propertyArrayItem = valuesWithCounts.findBy('value', property);
 
         if (!propertyArrayItem)  {  // item with this property not yet included, so add
-          propertyArrayItem = {'value': property, 'count': 0};
-          itemsArray.valuesWithCounts.push(propertyArrayItem);
+          propertyArrayItem = {'value': property, 'count': 0, 'rows': []};
+          itemsArray.valuesWithCounts.pushObject(propertyArrayItem);
         }
-        // increment number of objects:
+        // increment number of objects and insert item object into output
         propertyArrayItem.count++;
+        propertyArrayItem.rows.pushObject(item);
       });
     }
 
@@ -75,7 +85,7 @@ export function distinctValues(params) {
   itemsArray.valuesWithCounts = itemsArray.valuesWithCounts.sortBy('count').reverseObjects() ;
   //go through valuesWithCounts and create pure value array [ 1, 3, 5...]
   itemsArray.valuesWithCounts.forEach(function(object){
-    itemsArray.values.push(object.value)
+    itemsArray.values.pushObject(object.value)
   })
 
   return itemsArray;

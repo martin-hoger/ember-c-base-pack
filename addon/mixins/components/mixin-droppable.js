@@ -31,7 +31,7 @@ export default Mixin.create({
     @param {Object} event
     @param {Boolean} value
     */
-  setDropTarget(event, value) {
+  setDropTarget(value) {
     this.set('dropTarget', value);
   },
 
@@ -42,7 +42,7 @@ export default Mixin.create({
   */
   _drop(event) {
     if (this.get('element').contains(event.target)) {
-      this.setDropTarget(event, false);
+      this.setDropTarget(false);
     }
   },
 
@@ -53,7 +53,7 @@ export default Mixin.create({
   */
   _dragEnter(event) {
     if (this.get('element').contains(event.target)) {
-      this.setDropTarget(event, true);
+      this.setDropTarget(true);
     }
   },
 
@@ -64,7 +64,18 @@ export default Mixin.create({
   */
   _dragLeave(event) {
     if (this.get('element').contains(event.target)){
-      this.setDropTarget(event, false);
+      this.setDropTarget(false);
+    }
+  },
+
+  /**
+    @method _dragOver
+    @param {Object} event
+    @private
+  */
+  _dragOver(event) {
+    if (this.get('element').contains(event.target)){
+      this.setDropTarget(true);
     }
   },
 
@@ -103,6 +114,7 @@ export default Mixin.create({
     */
   onDragOver: on('dragOver', function (event) {
     event.preventDefault();
+    this._dragOver(...arguments);
     return false;
   })
 
