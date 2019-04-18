@@ -24,8 +24,8 @@ Example of use:
 */
 
 import Service from '@ember/service';
-import { setProperties } from '@ember/object';
 import { defer } from 'rsvp';
+
 
 export default Service.extend({
   showPrompt : false,

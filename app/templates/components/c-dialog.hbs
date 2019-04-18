@@ -1,39 +1,41 @@
 {{#if dialog.showPrompt}}
+ {{#transition-group transitionClass="dialog-fade"}}
 
-  <div class="dialog-background" {{action "cancel"}}></div>
+    <div class="dialog-background" {{action "cancel"}}></div>
 
-  <div class="dialog-window">
-    <div class="dialog-window-close" {{action "cancel"}}>
-      <i class="x icon" aria-hidden="true"></i>
-    </div>
+    <div class="dialog-window">
+      <div class="dialog-window-close" {{action "cancel"}}>
+        <i class="x icon" aria-hidden="true"></i>
+      </div>
 
-    <div class="dialog-window-title">
-      {{dialog.title}}
-    </div>
+      <div class="dialog-window-title">
+        {{dialog.title}}
+      </div>
 
-    {{#if dialog.message}}
-    	<div class="dialog-window-message">
-      	  {{dialog.message}}
+      {{#if dialog.message}}
+        <div class="dialog-window-message">
+          {{dialog.message}}
         </div>
-    {{/if}}
-
-    <div class="dialog-window-actions">
-      {{#if (eq dialog.type "confirm")}}
-	<button {{action "cancel"}}>
-	  {{t "form.cancel"}}
-	</button>
-	<button {{action "confirm"}}>
-	  {{t "form.confirm"}}
-	</button>
       {{/if}}
 
-      {{#if (eq dialog.type "alert")}}
-	<button {{action "cancel"}}>
-	  {{t "form.ok"}}
-	</button>
-      {{/if}}
+      <div class="dialog-window-actions">
+        {{#if (eq dialog.type "confirm")}}
+          <button {{action "confirm"}}>
+            {{t "form.confirm"}}
+          </button>
+          <button {{action "cancel"}}>
+            {{t "form.cancel"}}
+          </button>
+        {{/if}}
+
+        {{#if (eq dialog.type "alert")}}
+          <button {{action "cancel"}}>
+            {{t "form.ok"}}
+          </button>
+        {{/if}}
+      </div>
     </div>
-  </div>
 
+ {{/transition-group}}
 {{/if}}
 

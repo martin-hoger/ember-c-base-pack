@@ -1,10 +1,11 @@
 import Component from '@ember/component';
 import { inject } from '@ember/service';
-import $ from 'jquery';
+import { task, timeout } from 'ember-concurrency';
 
 export default Component.extend({
-  elementId : 'dialog',
-  dialog    : inject(),
+  elementId   : 'dialog',
+  dialog      : inject(),
+  taskTimeout : '200',
 
   actions: {
     confirm() {
@@ -13,7 +14,7 @@ export default Component.extend({
     cancel() {
       this.get('dialog').cancelDialog();
     }
-  }
+  },
 });
 
 

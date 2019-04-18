@@ -16,7 +16,7 @@
 
 /* Loading bar */
 body.loading #loading-bar { display: block; }
-#loading-bar { display: none; background: #ffffff9e url(../ember-c-base-pack/loading.svg) no-repeat 50% 50%; background-size: 150px auto; min-height: 200px; position: fixed; top: 50%; margin: -100px auto 0; z-index: 10000; border-radius: 50%; width: 200px; left: 0; right: 0; }
+#loading-bar { display: none; background: #ffffff url(../ember-c-base-pack/loading.svg) no-repeat 50% 50%; background-size: 150px auto; min-height: 200px; position: fixed; top: 50%; margin: -100px auto 0; z-index: 10000; border-radius: 50%; width: 200px; left: 0; right: 0; }
 
 /* Iframe box */
 .wait-block,
@@ -38,16 +38,21 @@ body.loading #loading-bar { display: block; }
 .country-label > .flag32                     { vertical-align: middle; position: relative; top: -2px;}
 
 /* Dialog */
+#dialog                                      { width: 100%; height: 100%; position: fixed; overflow: hidden; z-index: 500000; }
+.dialog-fade-enter                           { opacity: 0; }
+.dialog-fade-enter.dialog-fade-enter-active  { opacity: 1; -moz-transition: all 0.2s ease-out; -webkit-transition: all 0.2s ease-out; -o-transition: all 0.2s ease-out; -ms-transition: all 0.2s ease-out; transition: all 0.2s ease-out; }
+.dialog-fade-leave                           { opacity: 1; }
+.dialog-fade-leave.dialog-fade-leave-active  { opacity: 0; -moz-transition: all 0.2s ease-out; -webkit-transition: all 0.2s ease-out; -o-transition: all 0.2s ease-out; -ms-transition: all 0.2s ease-out; transition: all 0.2s ease-out; }
 
-.dialog-background                        { height: 100%; width: 100%; left: 0; top: 0; overflow: hidden; position: fixed; background-color: #000; opacity: 0.5; z-index: 500000; /* pointer-events: none; */ }
-.dialog-window                            { width: 380px; height: auto; margin-left: -175px; margin-top: -175px; position: fixed; background-color: #ffffff; top: 50%; left: 50%; opacity: 1; z-index: 500010;
-					    padding: 18px 25px; border-radius: 3px; box-shadow: rgba(0,0,0,.25) 0 14px 45px,rgba(0,0,0,.22) 0 10px 18px; }
-.dialog-window-close                      { position: absolute; top: 5px; right: 5px; cursor: pointer; }
-.dialog-window-title                      { width: 100%; text-align: center; margin-bottom: 18px; margin-top: 6px; font-weight: bold; }
-.dialog-window-message                    { width: 100%; text-align: center; margin-bottom: 23px; margin-top: -6px; }
-.dialog-window-actions                    { width: 100%; text-align: center; margin-bottom: 10px; }
-.dialog-window-actions button             { color: #ffffff; font-weight: bold; margin-left: 4px; margin-right: 4px; background-color: #888888; }
-.dialog-window-actions button:hover       { background-color: #aaaaaa; }
+.dialog-background                           { height: 100%; width: 100%; left: 0; top: 0; overflow: hidden; position: fixed; background-color: #000; z-index: 500010; opacity: 0.5; /* pointer-events: none; */ }
+.dialog-window                               { width: 380px; height: auto; margin-left: -175px; margin-top: -175px; position: fixed; background-color: #ffffff; top: 50%; left: 50%; z-index: 500020;  
+					       padding: 18px 25px; border-radius: 3px; box-shadow: rgba(0,0,0,.25) 0 14px 45px,rgba(0,0,0,.22) 0 10px 18px; }
+.dialog-window-close                         { position: absolute; top: 5px; right: 5px; cursor: pointer; }
+.dialog-window-title                         { width: 100%; text-align: center; margin-bottom: 18px; margin-top: 6px; font-weight: bold; }
+.dialog-window-message                       { width: 100%; text-align: center; margin-bottom: 23px; margin-top: -6px; }
+.dialog-window-actions                       { width: 100%; text-align: center; margin-bottom: 10px; }
+.dialog-window-actions button                { color: #ffffff; font-weight: bold; margin-left: 4px; margin-right: 4px; background-color: #888888; }
+.dialog-window-actions button:hover          { background-color: #aaaaaa; }
 
 /* modal window */
 .modal-window         { background: #fff; position: fixed; top: 50%; left: 50%; bottom: -50%; transform: translate(-50%,-50%); z-index: 10; -moz-transition: all 0.3s ease-out; -webkit-transition: all 0.3s ease-out; -o-transition: all 0.3s ease-out; -ms-transition: all 0.3s ease-out; transition: all 0.3s ease-out; }
