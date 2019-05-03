@@ -27,7 +27,7 @@ body.loading #loading-bar { display: block; }
 
 /* Avatar box */
 .avatar-box               { vertical-align: middle; display: inline-block; overflow: hidden; }
-.avatar-box.rounded > img { -webkit-border-radius: 50%; -moz-border-radius: 50%; border-radius: 50%; }
+.avatar-box.rounded > img { -webkit-border-radius: 50%; -moz-border-radius: 50%; border-radius: 50%; display: block; }
 
 /* Split box */
 .split-window-double        { position: absolute; bottom: 0; left: 0; right: 0; }

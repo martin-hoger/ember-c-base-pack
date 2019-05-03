@@ -6,7 +6,7 @@ import { defineProperty } from '@ember/object';
 export default Mixin.create({
 
   // Inputs:
-  rows           : [],         // Must contain the input collection. 
+  rows           : [],         // Must contain the input collection.
   query          : '',         // Must contain the filter query.
   filterProperty : 'fulltext', // Must contain the name of the property which we use for filtering.
   sortBy         : '',         // Can contain the name of the property we will use for sorting.
@@ -33,7 +33,7 @@ export default Mixin.create({
         })
       );
     } else {
-      defineProperty(this, 'rowsSorted', 
+      defineProperty(this, 'rowsSorted',
         computed('rows.[]', function(){ return this.get('rows'); })
       );
     }
@@ -46,6 +46,8 @@ export default Mixin.create({
       return this.get('rowsSorted');
     }
     searchQuery        = convertAccentedCharacters([ searchQuery ]);
+    // escape special characters:
+    searchQuery        = searchQuery.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&');
     searchQuery        = searchQuery.replace(' ', '.*');
     var regExPattern   = '\\b.*' + searchQuery + '.*\\b';
     var regexp         = new RegExp(regExPattern,'gi');
