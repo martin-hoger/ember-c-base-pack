@@ -24,8 +24,8 @@ Example of use:
 */
 
 import Service from '@ember/service';
-import { setProperties } from '@ember/object';
 import { defer } from 'rsvp';
+import { computed } from '@ember/object';
 
 export default Service.extend({
   showPrompt : false,
@@ -37,23 +37,43 @@ export default Service.extend({
   //Confirm ask function.
   confirm({ title, message }) {
     this.set('deferred', defer());
-    this.set('showPrompt', true);
     this.set('title', title);
     this.set('message', message);
     this.set('type', 'confirm');
 
-    return this.deferred.promise;
+    if (this.get('isIframe')) {
+      //JS confirm in iframe.
+      if (confirm(title)) {
+        this.deferred.resolve(true);
+        return this.deferred.promise;
+      } else {
+        this.deferred.reject();
+        return this.deferred.promise;
+      }
+    } else {
+      //Ember confirm.
+      this.set('showPrompt', true);
+      return this.deferred.promise;
+    }
   },
 
   //Alert ask function.
   alert({ title, message }) {
     this.set('deferred', defer());
-    this.set('showPrompt', true);
     this.set('title', title);
     this.set('message', message);
     this.set('type', 'alert');
 
-    return this.deferred.promise;
+    if (this.get('isIframe')) {
+      //JS alert in iframe.
+      alert(title);
+      this.deferred.resolve(true);
+      return this.deferred.promise;
+    } else {
+      //Alert confirm.
+      this.set('showPrompt', true);
+      return this.deferred.promise;
+    }
   },
 
   //Confirm function.
@@ -69,5 +89,22 @@ export default Service.extend({
     this.set('showPrompt', false);
     this.set('deferred', null);
   },
+  
+  //Returns if we run the app in frame.
+  isIframe: computed(function () {
+    try {
+      //If actual window is different from parent window.
+      if (window.self !== window.parent) {
+        //If actual windows or parent window is not running with Ember.
+        if ((!window.self.Em) || (!window.parent.Em)) {
+          return true;
+        }
+      }
+      return false;
+    } catch (e) {
+      return true;
+    }
+  }),
+
 
 });
