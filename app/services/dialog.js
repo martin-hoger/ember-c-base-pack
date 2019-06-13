@@ -27,6 +27,7 @@ import Service from '@ember/service';
 import { defer } from 'rsvp';
 import { computed } from '@ember/object';
 
+
 export default Service.extend({
   showPrompt : false,
   title      : null,
