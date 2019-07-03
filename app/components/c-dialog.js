@@ -3,7 +3,6 @@ import { inject } from '@ember/service';
 import { task, timeout } from 'ember-concurrency';
 
 export default Component.extend({
-  elementId   : 'dialog',
   dialog      : inject(),
   taskTimeout : '200',
 

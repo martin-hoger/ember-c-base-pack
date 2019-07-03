@@ -1,5 +1,5 @@
 {{#if dialog.showPrompt}}
- {{#transition-group transitionClass="dialog-fade"}}
+  {{#transition-group transitionClass="dialog-fade" id="dialog"}}
 
     <div class="dialog-background" {{action "cancel"}}></div>
 
@@ -36,6 +36,6 @@
       </div>
     </div>
 
- {{/transition-group}}
+  {{/transition-group}}
 {{/if}}
 
