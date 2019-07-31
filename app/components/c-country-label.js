@@ -15,9 +15,12 @@ import { getNames } from 'ember-i18n-iso-countries';
 
 export default Component.extend({
 
-  language  : 'en',
-  country   : null, //inserted by user as a component imput
-  classNames: ['country-label'],
+  language     : 'en',
+  country      : null, //inserted by user as a component imput
+  classNames   : ['country-label'],
+  displayLabel : true,
+
+  attributeBindings: ['countryName:title'],
 
   countryName: computed('language', 'country', function() {
     return getNames('en')[this.get('country')];
