@@ -61,3 +61,12 @@ body.loading #loading-bar { display: block; }
 .modal-window-close   { position: absolute;top: 20px;right: 0;font-size: 40px !important;cursor: pointer;}
 .modal-window-wrap.init-class > .modal-window  { right: -40%;}
 .modal-window-wrap > .modal-window             { right: 0%;}
+
+.tabs                         { position: relative; width: 100%; overflow: hidden; /* margin: 1em 0 2em; */ }
+.tabs .tab-menu               { text-align: left; border: 1px solid #d4d4d5; border-radius: 5px 5px 0px 0px; border-top: none; border-right: none; }
+.tabs .tab-pane               { font-size: 16px; padding: 10px 22px; margin: 0; margin-bottom: -1px; margin-right: -3px; display: inline-block; border: 1px solid #d4d4d5; border-left: none; border-bottom: none; border-radius: 5px 5px 0 0; }
+.tabs .tab-pane a             { color: #777; }
+.tabs .tab-pane.tab-current   { background: none #fff; }
+.tabs .tab-pane.tab-current a { color: #000; }
+.tabs .tab-content            { margin-top: 30px;}
+

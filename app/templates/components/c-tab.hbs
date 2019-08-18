@@ -1,0 +1,21 @@
+<div class="tab-menu">
+  {{#each navItems as |pane|}}
+    <div class="tab-pane {{if (eq isActiveId pane.elementId) "tab-current" ""}}">
+      <a href="#{{pane.elementId}}" {{action (action "select" pane.elementId)}}>
+	<i class="{{pane.icon}}"></i>
+	<span>{{pane.title}}</span>
+      </a>
+    </div>
+  {{/each}}
+</div>
+
+<div class="tab-content">
+  {{yield
+    (hash
+        pane=(component "c-tab-pane" parent=this activeId=isActiveId)
+        activeId=isActiveId
+        select=(action "select")
+    )
+  }}
+</div>
+
