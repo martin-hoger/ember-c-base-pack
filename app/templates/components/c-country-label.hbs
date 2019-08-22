@@ -1,5 +1,8 @@
 {{#if countryName}}
-  {{world-flag country 32}} {{countryName}}
+  {{world-flag country 32}} 
+  {{#if displayLabel}}
+    <span class="country-name">{{countryName}}</span>
+  {{/if}}
 {{else}}
   {{country}}
 {{/if}}

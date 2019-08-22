@@ -23,7 +23,7 @@ export default Mixin.create({
     // If sort by is defined, we can sort.
     if (this.get('sortBy')) {
       defineProperty(this, 'rowsSorted',
-        computed('rows.@each.' + this.get('sortBy'), 'rows.[]', 'sortBy', function(){
+        computed('rows.@each.' + this.get('sortBy'), 'rows.[]', 'sortBy', 'sortReverse', function(){
           var sortBy = this.get('sortBy');
           var rows = sortBy ? this.get('rows').sortBy(sortBy) : this.get('rows');
           if (this.get('sortReverse')) {
