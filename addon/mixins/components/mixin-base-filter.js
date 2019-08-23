@@ -40,6 +40,8 @@ export default Mixin.create({
   },
 
   // Filtr rows.
+  // matches all words or parts in any order!!
+  // https://stackoverflow.com/questions/13911053/regular-expression-to-match-all-words-in-a-query-in-any-order
   rowsFiltered: computed('query', 'rowsSorted.[]', function() {
     var searchQuery = this.get('query');
     if (searchQuery === '' || searchQuery === undefined) {
@@ -48,12 +50,12 @@ export default Mixin.create({
     searchQuery        = convertAccentedCharacters([ searchQuery ]);
     // escape special characters:
     searchQuery        = searchQuery.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&');
-    searchQuery        = searchQuery.replace(' ', '.*');
-    var regExPattern   = '\\b.*' + searchQuery + '.*\\b';
-    var regexp         = new RegExp(regExPattern,'gi');
+    searchQuery        = searchQuery.replace(/ /g, ')(?=.*');  // g=replace all spaces
+    var regExPattern   = '(?=.*' + searchQuery + ').+';
+    var regExp         = new RegExp(regExPattern,'gi');
     var filterProperty = this.get('filterProperty');
     return this.get('rowsSorted').filter(function(row){
-      return row.get(filterProperty).match(regexp);
+      return row.get(filterProperty).match(regExp);
     });
   }),
 
