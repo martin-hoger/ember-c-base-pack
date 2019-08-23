@@ -1,3 +1,27 @@
+/*
+  Example usage:
+   
+  {{#c-tab as |tab|}}
+    {{#tab.pane title="Main" icon="image icon"}}
+      Main content here
+    {{/tab.pane}}
+    {{#tab.pane title="Pregnancy" icon="home icon"}}
+      Pregnancy content here
+    {{/tab.pane}}
+  {{/c-tab}}
+
+  Or with fired action:
+
+  {{#c-tab openTab=(action "openTab") as |tab|}}
+    {{#each elementSet.tabElements as |contentElement|}}
+       {{tab.pane title=contentElement.name icon="image icon" value=contentElement}}
+    {{/each}}
+  {{/c-tab}}
+
+  In action function openTab is attribute value.
+
+ */
+
 import Component from '@ember/component';
 import TabPane from './c-tab-pane';
 import { computed } from '@ember/object';
@@ -34,8 +58,12 @@ export default Component.extend({
   }),
 
   actions: {
-    select(id) {
+    select(id, value) {
       this.set('isActiveId', id);
+      //If open value is defined.
+      if (value) {
+        this.attrs.openTab(value);
+      }
     }
   },
 

@@ -1,7 +1,7 @@
 <div class="tab-menu">
   {{#each navItems as |pane|}}
     <div class="tab-pane {{if (eq isActiveId pane.elementId) "tab-current" ""}}">
-      <a href="#{{pane.elementId}}" {{action (action "select" pane.elementId)}}>
+      <a href="#{{pane.elementId}}" {{action (action "select" pane.elementId pane.value)}}>
 	<i class="{{pane.icon}}"></i>
 	<span>{{pane.title}}</span>
       </a>

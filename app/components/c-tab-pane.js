@@ -25,7 +25,7 @@ export default Component.extend({
     this.registerWithParent();
   },
 
-  //UnRegister pane with parent - destroy hook.
+  //Unregister pane with parent - destroy hook.
   willDestroyElement() {
     this._super(...arguments);
     let parent = this.get('parent');
@@ -34,5 +34,6 @@ export default Component.extend({
       this.didRegister = false;
     }
   }
+ 
 });
 
