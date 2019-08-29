@@ -1,6 +1,6 @@
 <div class="tab-menu">
   {{#each navItems as |pane|}}
-    <div class="tab-pane {{if (eq isActiveId pane.elementId) "tab-current" ""}}">
+    <div class="tab-pane {{if (eq activeId pane.elementId) "tab-current" ""}}">
       <a href="#{{pane.elementId}}" {{action (action "select" pane.elementId pane.value)}}>
         {{c-font-icon type=pane.icon}}
 	<span>{{pane.title}}</span>
@@ -12,8 +12,7 @@
 <div class="tab-content">
   {{yield
     (hash
-        pane=(component "c-tab-pane" parent=this activeId=isActiveId)
-        activeId=isActiveId
+        pane=(component "c-tab-pane" parent=this activeId=activeId)
         select=(action "select")
     )
   }}

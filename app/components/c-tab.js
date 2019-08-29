@@ -2,19 +2,19 @@
   Example usage:
    
   {{#c-tab as |tab|}}
-    {{#tab.pane title="Main" icon="image icon"}}
+    {{#tab.pane title="Main" icon="image"}}
       Main content here
     {{/tab.pane}}
-    {{#tab.pane title="Pregnancy" icon="home icon"}}
+    {{#tab.pane title="Pregnancy" icon="home"}}
       Pregnancy content here
     {{/tab.pane}}
   {{/c-tab}}
 
   Or with fired action:
 
-  {{#c-tab openTab=(action "openTab") as |tab|}}
+  {{#c-tab as |tab|}}
     {{#each elementSet.tabElements as |contentElement|}}
-       {{tab.pane title=contentElement.name icon="image icon" value=contentElement}}
+       {{tab.pane title=contentElement.name icon="image" openTab=(action "openTab" contentElement)}}
     {{/each}}
   {{/c-tab}}
 
@@ -31,15 +31,16 @@ import { next } from '@ember/runloop';
 export default Component.extend({
   classNames : ['tabs'],
   panes      : [],
+  activeId   : '',
 
   didRender() {
     this._super(...arguments);
     
     //Set first tab as active.
-    if (!this.get('isActiveId')) {
-      var defaultPane = this.get('allPanes')[0];
+    if (!this.get('activeId')) {
+      var defaultPane = this.get('navItems')[0];
       if (defaultPane) {
-	this.set('isActiveId', defaultPane.get('elementId'));
+	this.set('activeId', defaultPane.get('elementId'));
       }
     }
   },
@@ -51,20 +52,25 @@ export default Component.extend({
   navItems: computed('allPanes.[]', function() {
     var items = [];
     this.get('allPanes').forEach((pane) => {
-      let item = pane;
-      items.pushObject(item);
+      if (pane.parent === this) {
+        let item = pane;
+        items.pushObject(item);
+      }
     });
     return items;
   }),
 
   actions: {
-    select(id, value) {
-      this.set('isActiveId', id);
-      //If open value is defined.
-      if (value) {
-        this.attrs.openTab(value);
-      }
+    select(id) {
+      this.set('activeId', id);
+
+      this.get('navItems').forEach((item)=> {
+        if (id === item.get('elementId')) {
+          item.click();
+        }
+      });
     }
+
   },
 
   //Register pane with tab component.

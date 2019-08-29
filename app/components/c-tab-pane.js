@@ -33,7 +33,15 @@ export default Component.extend({
       parent.removePane(this);
       this.didRegister = false;
     }
-  }
+  },
+  
+  click() {
+    //Action open tab is called for openned tab.
+    if (this.get('openTab')) {
+      this.get('openTab')();
+    }
+  },
+
  
 });
 
