@@ -1,12 +1,29 @@
-{{ember-initials
-  size=size
-  name=name
-  seedText=name
-  defaultName="?"
-  textColor="white"
-  fontSize=fontSize
-  fontWeight=fontWeight
-  fontFamily="Helvetica Neue Light, Arial, sans-serif"
-  image=image
-  title=title
-}}
+{{#if backgroundColor}}
+  {{!-- We need to copy it here, we backgroundColor is a computed property which we need to overwrite here. --}}
+  {{ember-initials
+    size=size
+    name=name
+    backgroundColor=backgroundColor
+    defaultName="?"
+    textColor=textColor
+    fontSize=fontSize
+    fontWeight=fontWeight
+    fontFamily="Helvetica Neue Light, Arial, sans-serif"
+    image=image
+    title=title
+  }}
+{{else}}
+  {{ember-initials
+    size=size
+    name=name
+    seedText=name
+    defaultName="?"
+    textColor=textColor
+    fontSize=fontSize
+    fontWeight=fontWeight
+    fontFamily="Helvetica Neue Light, Arial, sans-serif"
+    image=image
+    title=title
+  }}
+{{/if}}
+
