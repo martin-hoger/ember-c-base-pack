@@ -1,0 +1,24 @@
+<div
+    class="menu-dropdown-button"
+    onmouseout={{action "onFocus"}}
+    onmouseover={{action "overFocus"}}
+    {{action (toggle "displayMenu" this)}}
+    style={{buttonStyle}}
+>
+  <i class="{{icon}} icon"></i>
+  {{#if label}}
+    <label>{{label}}</label>
+  {{/if}}
+</div>
+
+{{#if displayMenu}}
+  {{#transition-group transitionClass="menu-dropdown-fade" class=(concat "menu-dropdown " menuClass)}}
+    <div
+        class="ui vertical menu menu-dropdown-lines"
+        onmouseout={{action "onFocus"}}
+        onmouseover={{action "overFocus"}}
+    >
+      {{yield}}
+    </div>
+  {{/transition-group}}
+{{/if}}
