@@ -15,7 +15,7 @@ export default Component.extend({
   fontWeight        : 35,
   size              : 75,
   rounded           : true,
-  color             : 'white',
+  textColor         : 'white',
 
   title: computed('name', function() {
     return this.get('name');
