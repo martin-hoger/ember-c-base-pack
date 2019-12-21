@@ -1,11 +1,11 @@
 <div class="tab-menu">
   {{#each navItems as |pane|}}
-    <div class="tab-pane {{if (eq activeId pane.elementId) "tab-current" ""}}">
-      <a href="#{{pane.elementId}}" {{action (action "select" pane.elementId pane.value)}}>
+    <a href="#{{pane.elementId}}" {{action (action "select" pane.elementId pane.value)}}>
+      <div class="tab-pane {{if (eq activeId pane.elementId) "tab-current" ""}}">
         {{c-font-icon type=pane.icon}}
 	<span>{{pane.title}}</span>
-      </a>
-    </div>
+      </div>
+    </a>
   {{/each}}
 </div>
 

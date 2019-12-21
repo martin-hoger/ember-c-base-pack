@@ -40,6 +40,13 @@ export default Component.extend({
     }, 1);
   },
 
+  // After render capture a keyboard and focus component to call keyDown()
+  // didRender() {
+  //   this._super(...arguments);
+  //   this.$().attr({ tabindex: 1 });
+  //   this.$().focus();
+  // },
+
   // style = Width: px or %, max-width
   style: computed('width', 'maxHeigh', function() {
     var maxHeigh = this.get('maxHeigh');
@@ -59,7 +66,13 @@ export default Component.extend({
         this.get('onClose')();
       }
     },
+  },
 
-  }
+  // keyDown(event) {
+  //   // Key ESC => close.
+  //   if (event.keyCode == 27) {
+  //     this.send('close');
+  //   }
+  // },
 
 });
