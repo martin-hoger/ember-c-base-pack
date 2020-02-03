@@ -1,5 +1,8 @@
 {{#if visible}}
   <div class="partial-overlay" style={{style}} onmouseenter={{action "contentFocused" true}}>
+    {{!--
+    <i class="partial-overlay-close remove circle icon" onclick={{action "close"}}></i>
+    --}}
     <div class="partial-overlay-content">
       <i class="partial-overlay-close remove circle icon" onclick={{action "close"}}></i>
       {{yield}}

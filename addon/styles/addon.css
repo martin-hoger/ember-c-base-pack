@@ -54,21 +54,30 @@ body.loading #loading-bar { display: block; }
 .dialog-window-actions button                { color: #ffffff; font-weight: bold; margin-left: 4px; margin-right: 4px; background-color: #888888; }
 .dialog-window-actions button:hover          { background-color: #aaaaaa; }
 
-/* modal window */
-.modal-window         { background: #fff; position: fixed; top: 50%; left: 50%; bottom: -50%; transform: translate(-50%,-50%); z-index: 10; -moz-transition: all 0.3s ease-out; -webkit-transition: all 0.3s ease-out; -o-transition: all 0.3s ease-out; -ms-transition: all 0.3s ease-out; transition: all 0.3s ease-out; }
+/* Modal window */
+.modal-window         { background: #fff; position: fixed; top: 50%; left: 50%; bottom: -50%; transform: translate(-50%,-50%); z-index: 15; -moz-transition: all 0.3s ease-out; -webkit-transition: all 0.3s ease-out; -o-transition: all 0.3s ease-out; -ms-transition: all 0.3s ease-out; transition: all 0.3s ease-out; }
 .modal-window-content { position: absolute; top: 50px; left: 50px; right: 50px; bottom: 50px; overflow-x: visible;overflow-y: auto; padding: 20px}
-.modal-window-overlay { background: rgba(0,0,0,.64); position: fixed;top: 0; left: 0px;right: 0;bottom: 0;z-index: 9; }
+.modal-window-overlay { background: rgba(0,0,0,.64); position: fixed;top: 0; left: 0px;right: 0;bottom: 0;z-index: 10; }
 .modal-window-close   { position: absolute;top: 20px;right: 0;font-size: 40px !important;cursor: pointer;}
 .modal-window-wrap.init-class > .modal-window  { right: -40%;}
 .modal-window-wrap > .modal-window             { right: 0%;}
 
-.tabs                         { position: relative; width: 100%; overflow: hidden; /* margin: 1em 0 2em; */ }
-.tabs .tab-menu               { text-align: left; border: 1px solid #d4d4d5; border-radius: 5px 5px 0px 0px; border-top: none; border-right: none; }
-.tabs .tab-pane               { font-size: 16px; padding: 10px 22px; margin: 0; margin-bottom: -1px; margin-right: -3px; display: inline-block; border: 1px solid #d4d4d5; border-left: none; border-bottom: none; border-radius: 5px 5px 0 0; }
-.tabs .tab-pane a             { color: #777; }
-.tabs .tab-pane.tab-current   { background: none #fff; }
-.tabs .tab-pane.tab-current a { color: #000; }
-.tabs .tab-content            { margin-top: 30px;}
+.modal-fade-group                           { width: 100%; height: 100%; position: fixed; overflow: hidden; z-index: 500000; }
+.modal-fade-enter                           { opacity: 0; }
+.modal-fade-enter.modal-fade-enter-active   { opacity: 1; -moz-transition: all 0.2s ease-out; -webkit-transition: all 0.2s ease-out; -o-transition: all 0.2s ease-out; -ms-transition: all 0.2s ease-out; transition: all 0.2s ease-out; }
+.modal-fade-leave                           { opacity: 1; }
+.modal-fade-leave.modal-fade-leave-active   { opacity: 0; -moz-transition: all 0.2s ease-out; -webkit-transition: all 0.2s ease-out; -o-transition: all 0.2s ease-out; -ms-transition: all 0.2s ease-out; transition: all 0.2s ease-out; }
+
+/* Tabs */
+.tabs                               { position: relative; width: 100%; overflow: hidden; /* margin: 1em 0 2em; */ }
+.tabs .tab-menu                     { text-align: left; border: 1px solid #d4d4d5; border-radius: 5px 5px 0px 0px; border-top: none; border-right: none; }
+.tabs .tab-pane                     { font-size: 16px; padding: 10px 22px; margin: 0; margin-bottom: -1px; margin-right: -3px; display: inline-block; border: 1px solid #d4d4d5; border-left: none; border-bottom: none; border-radius: 5px 5px 0 0; }
+.tabs .tab-pane:hover               { background-color: #f7f7f7; }
+.tabs a .tab-pane                   { color: #777; border-bottom: 1px solid #d4d4d5;  }
+.tabs a .tab-pane.tab-current       { color: #000; }
+.tabs .tab-pane.tab-current         { background: none #fff; border-bottom: 1px solid transparent; }
+.tabs .tab-pane.tab-current:hover   { border-bottom: 1px solid transparent; }
+.tabs .tab-content                  { margin-top: 30px;}
 
 /* Menu dropdown */
 .menu-dropdown-wrapper                                        { /* float: right; */ position: relative; display: inline-block; }
@@ -78,11 +87,14 @@ body.loading #loading-bar { display: block; }
 .menu-dropdown-button                                         { width: auto; height: auto; cursor: pointer; text-align: center; padding: 3px; padding-left: 5px; padding-right: 5px; margin-bottom: 4px; border: 1px solid transparent; }
 .menu-dropdown-button:hover                                   { border: 1px solid #e8e8e8; background-color: #f2f2f2; border-radius: 4px; }
 .menu-dropdown-button i.icon                                  { margin: 0px; padding: 0px; }
-.menu-dropdown-button label                                   { padding-left: 5px; }
-.ui.vertical.menu.menu-dropdown-lines                         { width: auto; min-width: 270px; height: auto; font-size: 14px; }
+.menu-dropdown-button label                                   { padding-left: 5px; padding-right: 2px; cursor: pointer; }
+.ui.vertical.menu.menu-dropdown-lines                         { width: auto; min-width: 280px; height: auto; font-size: 14px; }
 .ui.vertical.menu.menu-dropdown-lines .item a:hover           { background-color: #f2f2f2; }
-.ui.vertical.menu.menu-dropdown-lines .item i.icon            { display: inline-block; width: 37px; float: none;  text-align: center; }
+.ui.vertical.menu.menu-dropdown-lines .item i.icon            { display: inline-block; width: 37px; float: none;  text-align: center; margin-left: -11px; }
 .ui.vertical.menu.menu-dropdown-lines .item                   { font-size: 14px; }
+.ui.vertical.menu.menu-dropdown-lines .item .header i.icon    { width: 33px; }
+.ui.vertical.menu.menu-dropdown-lines .item .header           { color: #939393; font-weight: normal;  }
+.ui.vertical.menu.menu-dropdown-lines .item .menu .item       { padding-left: 45px; color: #000; }
 
 .menu-dropdown-fade-enter                                     { opacity: 0; }
 .menu-dropdown-fade-enter.menu-dropdown-fade-enter-active     { opacity: 1; -moz-transition: all 0.2s ease-out; -webkit-transition: all 0.2s ease-out; -o-transition: all 0.2s ease-out; -ms-transition: all 0.2s ease-out; transition: all 0.2s ease-out; }
