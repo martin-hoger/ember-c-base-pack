@@ -119,15 +119,15 @@ export default Mixin.create({
   }),
 
   /**
-    Sort 'rows', when gragged row is dropped to the target row. Rows are re-orderd
+    Sort 'rows', when dragged row is dropped to the target row. Rows are re-orderd
     and weight is updated to 0..numberOfElements-1
 
-    Usage, if we use default 'weight' as a weight key and 'id' ad ID key:
+    Usage, if we use default 'weight' as a weight key and 'id' as ID key:
     var sorted = this._getGragDropSortedArray(targetProperty, draggedProperty, properties);
     Usage, if we use 'weight' as a weight key:
     var sorted = this._getGragDropSortedArray(targetProperty, draggedProperty, properties, 'property.id');
   */
-  _getGragDropSortedArray(targetRow, draggedRow, rows, idKey, weightKey) {
+  getGragDropSortedArray(targetRow, draggedRow, rows, idKey, weightKey) {
     // If variables not defined, use default:
     idKey = (idKey) ? idKey : 'id';
     weightKey = (weightKey) ? weightKey : 'weight';
