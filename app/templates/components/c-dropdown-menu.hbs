@@ -5,9 +5,13 @@
     {{action (toggle "displayMenu" this)}}
     style={{buttonStyle}}
 >
-  <i class="{{icon}} icon"></i>
-  {{#if label}}
-    <label>{{label}}</label>
+  {{#if button}}
+    {{c-form-button label=label icon=icon}}
+  {{else}}
+    <i class="{{icon}} icon"></i>
+    {{#if label}}
+      <label>{{label}}</label>
+    {{/if}}
   {{/if}}
 </div>
 

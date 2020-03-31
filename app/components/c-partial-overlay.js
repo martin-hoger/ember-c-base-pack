@@ -33,6 +33,7 @@ export default Component.extend({
   classNameBindings: ['visible::hidden', 'focused:focused:blurred', 'initClass:init-class:'],
   visible          : true,
   maxLeft          : 300,
+  overlayWidth     : 80,
   firstOpen        : true,  // first overlay open => overlay stays left, even if mouse is not on it
   focused          : true,  // first overlay open
   initClass        : true,
@@ -75,10 +76,11 @@ export default Component.extend({
     var overlayIds = this.get('session.cPartialoverlayIds');
 
     // Set width for multiple windows.
-    var width = 80;
+    var width = this.get('overlayWidth');
+    var diff  = 100 - this.get('overlayWidth');
     if (overlayIds) {
       var index = overlayIds.indexOf(overlayId);
-      width = 100 - 20 / overlayIds.length * (index + 1);
+      width = 100 - (diff / overlayIds.length * (index + 1));
     }
     styles.push(`width: ${width}%`);
 

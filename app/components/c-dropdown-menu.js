@@ -37,10 +37,11 @@ import { htmlSafe } from '@ember/string';
 export default Component.extend({
   classNames        : 'menu-dropdown-wrapper',
   attributeBindings : ['style'],
+  classNameBindings : ['button:menu-dropdown-wrapper-button'],
 
   displayMenu       : false,
   isMouseOver       : false,
-  taskTimeout       : 200,
+  taskTimeout       : 800,
   fontSize          : 13,
   textAlign         : 'left',
   menuAlign         : 'right',

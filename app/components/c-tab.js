@@ -63,7 +63,6 @@ export default Component.extend({
   actions: {
     select(id) {
       this.set('activeId', id);
-
       this.get('navItems').forEach((item)=> {
         if (id === item.get('elementId')) {
           item.click();
@@ -81,7 +80,9 @@ export default Component.extend({
   },
   //Unregister pane with tab component.
   removePane(pane) {
-    this.get('panes').removeObject(pane);
+    next(this, function() {
+      this.get('panes').removeObject(pane);
+    });
   }
 });
 

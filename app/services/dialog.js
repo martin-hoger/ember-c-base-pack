@@ -44,7 +44,7 @@ export default Service.extend({
 
     if (this.get('isIframe')) {
       //JS confirm in iframe.
-      if (confirm(title)) {
+      if (confirm(title + ': ' + message)) {
         this.deferred.resolve(true);
         return this.deferred.promise;
       } else {
@@ -67,7 +67,7 @@ export default Service.extend({
 
     if (this.get('isIframe')) {
       //JS alert in iframe.
-      alert(title);
+      alert(title + ': ' + message);
       this.deferred.resolve(true);
       return this.deferred.promise;
     } else {
