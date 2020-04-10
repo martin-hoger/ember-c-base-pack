@@ -30,6 +30,7 @@
 */
 
 import Component from '@ember/component';
+import $ from 'jquery';
 import { computed } from '@ember/object';
 import { task, timeout } from 'ember-concurrency';
 import { htmlSafe } from '@ember/string';
@@ -41,11 +42,28 @@ export default Component.extend({
 
   displayMenu       : false,
   isMouseOver       : false,
-  taskTimeout       : 800,
+  taskTimeout       : 1200,
   fontSize          : 13,
   textAlign         : 'left',
   menuAlign         : 'right',
   icon              : 'ellipsis vertical',
+
+  didInsertElement() {
+    this._super(...arguments)
+    var context = this;
+    $('body').click(function() {	
+      //If actual dropdown menu is opened.
+      if (context.get('displayMenu')) {
+        //If mouse is not on active dropdown menu.
+        if (!context.get('isMouseOver')) {
+          //If dropdown menu object is not destroyed yet.
+          if (!(context.get('isDestroyed') || context.get('isDestroying'))) {
+            context.set('displayMenu', false);
+          }
+        }
+      }
+    });
+  },
 
   style: computed('textAlign', 'menuAlign', function() {
     var textAlign = this.get('textAlign');
@@ -75,7 +93,7 @@ export default Component.extend({
     },
     overFocus() {
       this.set('isMouseOver', true);
-    }
+    },
   },
 
   //Close menu (Ember concurrency).
