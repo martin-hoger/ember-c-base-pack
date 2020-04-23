@@ -51,7 +51,7 @@ export default Component.extend({
   didInsertElement() {
     this._super(...arguments)
     var context = this;
-    $('body').click(function() {	
+    $('html').click(function() {	
       //If actual dropdown menu is opened.
       if (context.get('displayMenu')) {
         //If mouse is not on active dropdown menu.
