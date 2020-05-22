@@ -43,6 +43,7 @@ export default Component.extend({
   displayMenu       : false,
   isMouseOver       : false,
   taskTimeout       : 1200,
+  taskTimeoutShort  : 50,
   fontSize          : 13,
   textAlign         : 'left',
   menuAlign         : 'right',
@@ -51,6 +52,8 @@ export default Component.extend({
   didInsertElement() {
     this._super(...arguments)
     var context = this;
+
+    //If click is out of dropdown menu => close the dropdown menu.
     $('html').click(function() {	
       //If actual dropdown menu is opened.
       if (context.get('displayMenu')) {
@@ -61,6 +64,18 @@ export default Component.extend({
             context.set('displayMenu', false);
           }
         }
+      }
+    });
+
+    //If click is on item of dropdown menu => close the dropdown menu.
+    //If click is on item with no-close class => do not close the dropdown menu.
+    $('.menu-dropdown-wrapper').click(function() {	
+      var elements             = document.querySelectorAll(':hover');
+      var itemClassContains    = elements[elements.length - 1].classList.contains('item');
+      var noCloseClassContains = elements[elements.length - 1].classList.contains('no-close');
+      //Do not close if no close class is present.
+      if (itemClassContains && !noCloseClassContains) {
+        context.get('closeMenuClickItem').perform();
       }
     });
   },
@@ -89,20 +104,25 @@ export default Component.extend({
   actions: {
     onFocus() {
       this.set('isMouseOver', false);
-      this.get('closeMenu').perform();
+      this.get('closeMenuMouseOut').perform();
     },
     overFocus() {
       this.set('isMouseOver', true);
     },
   },
 
-  //Close menu (Ember concurrency).
-  closeMenu: task(function * () {
-    //Timeout.
+  //Close menu - mouse is out of dropdown menu.
+  closeMenuMouseOut: task(function * () {
     yield timeout(this.get('taskTimeout'));
     if (!this.get('isMouseOver')) {
       this.set('displayMenu', false);
     }
+  }).restartable(),
+  
+  //Close menu - click on item of dropdown menu.
+  closeMenuClickItem: task(function * () {
+    yield timeout(this.get('taskTimeoutShort'));
+    this.set('displayMenu', false);
   }).restartable(),
 
 });
