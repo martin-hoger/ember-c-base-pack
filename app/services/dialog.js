@@ -44,7 +44,11 @@ export default Service.extend({
 
     if (this.get('isIframe')) {
       //JS confirm in iframe.
-      if (confirm(title + ': ' + message)) {
+      var confirmMessage = title;
+      if (message) {
+        confirmMessage = confirmMessage + ': ' + message;
+      }
+      if (confirm(confirmMessage)) {
         this.deferred.resolve(true);
         return this.deferred.promise;
       } else {
@@ -67,7 +71,11 @@ export default Service.extend({
 
     if (this.get('isIframe')) {
       //JS alert in iframe.
-      alert(title + ': ' + message);
+      var alertMessage = title;
+      if (message) {
+        alertMessage = alertMessage + ': ' + message;
+      }
+      alert(alertMessage);
       this.deferred.resolve(true);
       return this.deferred.promise;
     } else {
