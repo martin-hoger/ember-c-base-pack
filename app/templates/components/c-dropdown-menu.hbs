@@ -8,7 +8,9 @@
   {{#if button}}
     {{c-form-button label=label icon=icon}}
   {{else}}
-    <i class="{{icon}} icon"></i>
+    {{#if icon}}
+      <i class="{{icon}} icon"></i>
+    {{/if}}
     {{#if label}}
       <label>{{label}}</label>
     {{/if}}
