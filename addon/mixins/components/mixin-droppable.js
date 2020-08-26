@@ -127,7 +127,7 @@ export default Mixin.create({
     Usage, if we use 'weight' as a weight key:
     var sorted = this._getGragDropSortedArray(targetProperty, draggedProperty, properties, 'property.id');
   */
-  getGragDropSortedArray(targetRow, draggedRow, rows, idKey, weightKey) {
+  _getGragDropSortedArray(targetRow, draggedRow, rows, idKey, weightKey) {
     // If variables not defined, use default:
     idKey = (idKey) ? idKey : 'id';
     weightKey = (weightKey) ? weightKey : 'weight';
