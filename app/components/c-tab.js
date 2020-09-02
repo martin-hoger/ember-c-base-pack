@@ -53,8 +53,11 @@ export default Component.extend({
     var items = [];
     this.get('allPanes').forEach((pane) => {
       if (pane.parent === this) {
-        let item = pane;
-        items.pushObject(item);
+        //Set active pane tab.
+        if (this.get('defaultTab') === pane.get('title')) {
+          this.set('activeId', pane.get('elementId'));
+        }
+        items.pushObject(pane);
       }
     });
     return items;
@@ -62,6 +65,7 @@ export default Component.extend({
 
   actions: {
     select(id) {
+      this.set('defaultTab', null);
       this.set('activeId', id);
       this.get('navItems').forEach((item)=> {
         if (id === item.get('elementId')) {
