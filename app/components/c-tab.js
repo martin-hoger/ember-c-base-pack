@@ -35,8 +35,7 @@ export default Component.extend({
 
   didRender() {
     this._super(...arguments);
-    
-    //Set first tab as active.
+    //If active tab is not defined => set first tab as active.
     if (!this.get('activeId')) {
       var defaultPane = this.get('navItems')[0];
       if (defaultPane) {
@@ -53,8 +52,8 @@ export default Component.extend({
     var items = [];
     this.get('allPanes').forEach((pane) => {
       if (pane.parent === this) {
-        //Set active pane tab.
-        if (this.get('defaultTab') === pane.get('title')) {
+        //Set active defined default tab.
+        if (this.get('defaultTab') === pane.get('tabId')) {
           this.set('activeId', pane.get('elementId'));
         }
         items.pushObject(pane);
@@ -65,7 +64,6 @@ export default Component.extend({
 
   actions: {
     select(id) {
-      this.set('defaultTab', null);
       this.set('activeId', id);
       this.get('navItems').forEach((item)=> {
         if (id === item.get('elementId')) {
@@ -73,7 +71,6 @@ export default Component.extend({
         }
       });
     }
-
   },
 
   //Register pane with tab component.
