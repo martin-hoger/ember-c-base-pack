@@ -4,6 +4,7 @@ distinctValues(items, propertyName, true)
 inputs: items(array of objects) you want to go through
         propertyName(string) you want to test
         optional 'true' if you want to count items with undefined property
+        optional 'true' if you want array to be sorted aplhabetically (and not by item count)
 output: object like this, saved number of occurrences of this property in .count.
         Array is sorted by count (from highest number to lowest).
         In output .rows we store objects of that property. For example all articles
@@ -44,6 +45,9 @@ highlights : Ember.computed('rowsFiltered', function() {
 if you want also count articles with undefined type:
 return distinctValues([rowsFiltered, 'type', true]);
 
+if you want sort by aplhabet:
+return distinctValues([rowsFiltered, 'type', false, true]);
+
 */
 
 import { helper } from '@ember/component/helper';
@@ -53,6 +57,7 @@ export function distinctValues(params) {
   var items = params[0];  // = articles
   var propertyName = params[1];
   var countUndefined = params[2];
+  var sortByAlphabet = params[3];
   var itemsArray = { 'values' : [], 'valuesWithCounts' : [] };
 
   items.forEach(function(item) {
@@ -87,6 +92,11 @@ export function distinctValues(params) {
   itemsArray.valuesWithCounts.forEach(function(object){
     itemsArray.values.pushObject(object.value)
   })
+
+  if (sortByAlphabet) {
+    itemsArray.valuesWithCounts = itemsArray.valuesWithCounts.sortBy('value');
+    itemsArray.values.sort();
+  }
 
   return itemsArray;
 }
