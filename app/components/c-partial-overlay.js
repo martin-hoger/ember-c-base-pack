@@ -37,6 +37,11 @@ export default Component.extend({
   firstOpen        : true,  // first overlay open => overlay stays left, even if mouse is not on it
   focused          : true,  // first overlay open
   initClass        : true,
+  mouseOnLeftPanel : true,
+  mouseOnContent   : true,
+  mouseOnOverlay   : true,
+
+
   // Create the global array of overlay IDs.
   // scheduleOnce() must be used. Otherwise the order of application style: computed()
   // can be not from parent to child, but from child to parent (in some cases)
@@ -102,25 +107,46 @@ export default Component.extend({
         this.set('firstOpen', false);
         return;
       }
-      // is the mouse on overlay content? Global variable.
+
+      // Is the mouse on overlay content? Global variable.
       this.set('mouseOnContent', status);
 
       // content focused: move window left immediately
       if (status) {
-        this.set('focused', status);
+        later(( () => {
+          if (!this.get('mouseOnLeftPanel')) {
+            this.set('mouseOnOverlay', false);
+            this.set('focused', status);
+          }
+        }), 10);
       }
 
       // mouse left the content: wait and if mouse is not on content back, then move window right
       if (!status) {
         later(( () => {
           if (!this.get('mouseOnContent')) {
-            this.set('focused', false);
+            if (this.get('mouseOnOverlay')) {
+              this.set('focused', false);
+            }
           }
-        }), 300);
+        }), 150);
       }
 
-    }
+    },
 
-  }
+    overlayFocused(status) {
+      this.set('mouseOnOverlay', true);
+    },
+
+    leftPanelFocused(status) {
+      this.set('mouseOnLeftPanel', status);
+      if (!this.get('mouseOnLeftPanel')) {
+        later(( () => {
+          this.send('contentFocused', this.get('mouseOnContent'));
+        }), 30);
+      }
+    },
+  },
+
 
 });
