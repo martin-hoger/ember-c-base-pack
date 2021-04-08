@@ -53,6 +53,7 @@ export default Component.extend({
     var items = [];
     this.get('allPanes').forEach((pane) => {
       if (pane.parent === this) {
+
         // Set active defined default tab.
         // if (this.get('defaultTab') === pane.get('tabId')) {
         //   this.set('activeId', pane.get('elementId'));
@@ -60,7 +61,8 @@ export default Component.extend({
         items.pushObject(pane);
       }
     });
-    return items;
+
+    return items.sortBy('weight');
   }),
 
   actions: {
