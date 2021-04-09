@@ -34,7 +34,7 @@ export default Service.extend({
   message    : null,
   deferred   : null,
   type       : null,
-
+  
   //Confirm ask function.
   confirm({ title, message }) {
     this.set('deferred', defer());
