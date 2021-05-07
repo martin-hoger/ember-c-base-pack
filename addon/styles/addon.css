@@ -104,7 +104,10 @@ body.loading #loading-bar { display: block; }
 .ui.vertical.menu.menu-dropdown-lines .item                   { font-size: 14px; }
 .ui.vertical.menu.menu-dropdown-lines .item .header i.icon    { width: 33px; }
 .ui.vertical.menu.menu-dropdown-lines .item .header           { color: #939393; font-weight: normal;  }
-.ui.vertical.menu.menu-dropdown-lines .item .menu .item       { padding-left: 45px; color: #000; }
+.ui.vertical.menu.menu-dropdown-lines .item .menu .item       { color: #000; }
+
+.ui.vertical.menu.menu-dropdown-lines .item .header           { margin-left: -32px; }
+.ui.vertical.menu.menu-dropdown-lines .item .menu             { margin-left: -48px; }
 
 .menu-dropdown-fade-enter                                     { opacity: 0; }
 .menu-dropdown-fade-enter.menu-dropdown-fade-enter-active     { opacity: 1; -moz-transition: all 0.2s ease-out; -webkit-transition: all 0.2s ease-out; -o-transition: all 0.2s ease-out; -ms-transition: all 0.2s ease-out; transition: all 0.2s ease-out; }
