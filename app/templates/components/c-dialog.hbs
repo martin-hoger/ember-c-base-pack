@@ -21,10 +21,18 @@
       <div class="dialog-window-actions">
         {{#if (eq dialog.type "confirm")}}
           <button {{action "confirm"}}>
-            {{t "form.confirm"}}
+            {{#if dialog.confirmText}}
+              {{dialog.confirmText}}
+            {{else}}
+              {{t "form.confirm"}}
+            {{/if}}
           </button>
           <button {{action "cancel"}}>
-            {{t "form.cancel"}}
+            {{#if dialog.cancelText}}
+              {{dialog.cancelText}}
+            {{else}}
+              {{t "form.cancel"}}
+            {{/if}}
           </button>
         {{/if}}
 

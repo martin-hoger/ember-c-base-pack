@@ -36,9 +36,11 @@ export default Service.extend({
   type       : null,
   
   //Confirm ask function.
-  confirm({ title, message }) {
+  confirm({ title, message, confirmText, cancelText }) {
     this.set('deferred', defer());
     this.set('title', title);
+    this.set('confirmText', confirmText);
+    this.set('cancelText', cancelText);
     this.set('message', message);
     this.set('type', 'confirm');
 
