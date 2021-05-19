@@ -20,7 +20,8 @@ i.icon.partial-overlay-close            { padding-top: 15px; padding-left: 3px; 
 
 /* Loading bar */
 body.loading #loading-bar { display: block; }
-#loading-bar { display: none; background: #ffffff url(../ember-c-base-pack/loading.svg) no-repeat 50% 50%; background-size: 150px auto; min-height: 200px; position: fixed; top: 50%; margin: -100px auto 0; z-index: 9999999999; border-radius: 50%; width: 200px; left: 0; right: 0; }
+#loading-bar              { display: none; background: #ffffff url(../ember-c-base-pack/loading.svg) no-repeat 50% 50%; background-size: 150px auto; min-height: 200px; position: fixed; top: 50%; margin: -100px auto 0; z-index: 9999999999; border-radius: 50%; width: 200px; left: 0; right: 0; }
+.loading-bar-message      { background-color: white; position: absolute; width: 350px; bottom: -28px; left: -75px; text-align: center; padding: 20px 30px; border-radius: 14px; font-family: "Open Sans", sans-serif; font-size: 13px; }
 
 /* Iframe box */
 .wait-block,
