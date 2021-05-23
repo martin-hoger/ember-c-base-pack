@@ -1,0 +1,22 @@
+{{#if (or this.params.title this.params.message)}}
+
+  <div class="ui icon message">
+    {{#if this.params.loading}}
+      <i class="notched circle loading icon"></i>
+    {{/if}}
+
+    <div class="content">
+      {{#if this.params.title}}
+        <div class="header">
+          {{this.params.title}}
+        </div>
+      {{/if}}
+
+      {{#if this.params.message}}
+        {{this.params.message}}
+      {{/if}}
+    </div>
+  </div>
+
+{{/if}}
+

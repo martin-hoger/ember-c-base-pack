@@ -1,0 +1,5 @@
+{{#if (is-component (concat "c-notification-center-item-" this.notificationCenter.params.itemType ))}}
+  {{component (concat "c-notification-center-item-" this.notificationCenter.params.itemType)
+      params=this.notificationCenter.params
+  }}  
+{{/if}}
