@@ -1,0 +1,12 @@
+<div class="shortcut-icon-wrapper">
+  {{#each shortcutKeys as |key index|}}
+    {{#if index}}
+      <div class="shortcut-icon-plus">
+        +
+      </div>
+    {{/if}}
+    <div class="shortcut-icon">
+      {{key}}
+    </div>
+  {{/each}}
+</div>

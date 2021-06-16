@@ -109,23 +109,29 @@ body.loading #loading-bar { display: block; }
 .menu-dropdown-wrapper-button  .menu-dropdown-button,
 .menu-dropdown-wrapper-button  .menu-dropdown-button:hover      { border: 0px; background-color: none; padding: 0px; }
 
-.ui.vertical.menu.menu-dropdown-lines                         { width: auto; min-width: 280px; height: auto; font-size: 14px; }
-.ui.vertical.menu.menu-dropdown-lines .item                   { padding-left: 48px; line-height: 18px; }
-.ui.vertical.menu.menu-dropdown-lines .item a:hover           { background-color: #f2f2f2; }
-.ui.vertical.menu.menu-dropdown-lines .item i.icon            { display: inline-block; width: 37px; float: none;  text-align: center; margin-left: -41px; vertical-align: text-top; }
-.ui.vertical.menu.menu-dropdown-lines .item                   { font-size: 14px; }
-.ui.vertical.menu.menu-dropdown-lines .item .header i.icon    { width: 33px; }
-.ui.vertical.menu.menu-dropdown-lines .item .header           { color: #939393; font-weight: normal;  }
-.ui.vertical.menu.menu-dropdown-lines .item .menu .item       { color: #000; }
+.ui.vertical.menu.menu-dropdown-lines                              { width: auto; min-width: 280px; height: auto; font-size: 14px; }
+.ui.vertical.menu.menu-dropdown-lines .item                        { padding-left: 48px; line-height: 18px; }
+.ui.vertical.menu.menu-dropdown-lines .item a:hover                { background-color: #f2f2f2; }
+.ui.vertical.menu.menu-dropdown-lines .item i.icon                 { display: inline-block; width: 37px; float: none;  text-align: center; margin-left: -41px; vertical-align: text-top; }
+.ui.vertical.menu.menu-dropdown-lines .item                        { font-size: 14px; }
+.ui.vertical.menu.menu-dropdown-lines .item .header i.icon         { width: 33px; }
+.ui.vertical.menu.menu-dropdown-lines .item .header                { color: #939393; font-weight: normal;  }
+.ui.vertical.menu.menu-dropdown-lines .item .menu .item            { color: #000; }
 
-.ui.vertical.menu.menu-dropdown-lines .item .header           { margin-left: -32px; }
-.ui.vertical.menu.menu-dropdown-lines .item .menu             { margin-left: -48px; }
+.ui.vertical.menu.menu-dropdown-lines .item .header                { margin-left: -32px; }
+.ui.vertical.menu.menu-dropdown-lines .item .menu                  { margin-left: -48px; }
 
-.menu-dropdown-fade-enter                                     { opacity: 0; }
-.menu-dropdown-fade-enter.menu-dropdown-fade-enter-active     { opacity: 1; -moz-transition: all 0.2s ease-out; -webkit-transition: all 0.2s ease-out; -o-transition: all 0.2s ease-out; -ms-transition: all 0.2s ease-out; transition: all 0.2s ease-out; }
-.menu-dropdown-fade-leave                                     { opacity: 1; }
-.menu-dropdown-fade-leave.menu-dropdown-fade-leave-active     { opacity: 0; -moz-transition: all 0.2s ease-out; -webkit-transition: all 0.2s ease-out; -o-transition: all 0.2s ease-out; -ms-transition: all 0.2s ease-out; transition: all 0.2s ease-out; }
+.ui.vertical.menu.menu-dropdown-lines .item .shortcut-icon-wrapper { position: absolute; top: 10px; right: 17px; }
 
-.form-fieldset-parameters .menu-dropdown-button               { color: #fff; background-color: transparent; border: none; }
+.menu-dropdown-fade-enter                                          { opacity: 0; }
+.menu-dropdown-fade-enter.menu-dropdown-fade-enter-active          { opacity: 1; -moz-transition: all 0.2s ease-out; -webkit-transition: all 0.2s ease-out; -o-transition: all 0.2s ease-out; -ms-transition: all 0.2s ease-out; transition: all 0.2s ease-out; }
+.menu-dropdown-fade-leave                                          { opacity: 1; }
+.menu-dropdown-fade-leave.menu-dropdown-fade-leave-active          { opacity: 0; -moz-transition: all 0.2s ease-out; -webkit-transition: all 0.2s ease-out; -o-transition: all 0.2s ease-out; -ms-transition: all 0.2s ease-out; transition: all 0.2s ease-out; }
 
+.form-fieldset-parameters .menu-dropdown-button                    { color: #fff; background-color: transparent; border: none; }
+
+/* Shortcut icons */
+.shortcut-icon-wrapper      { display: inline-block; margin-top: }
+.shortcut-icon              { display: inline-block; background-color: #f2f2f2; border: 1px solid #dedede;  padding: 2px 7px; border-radius: 4px; }
+.shortcut-icon-plus         { display: inline-block; background-color: transparent; border: 1px solid transparent;  padding: 2px 0px; }
 
