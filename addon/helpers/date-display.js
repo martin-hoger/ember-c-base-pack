@@ -19,6 +19,10 @@ export function dateDisplay(params) {
       return moment(date).format('HH:mm');
     }
 
+    if (format === 'months-years') {
+      return moment(date).format('MM.YYYY');
+    }
+
 }
 
 export default Ember.Helper.helper(dateDisplay);
