@@ -36,18 +36,20 @@ import { task, timeout } from 'ember-concurrency';
 import { htmlSafe } from '@ember/string';
 
 export default Component.extend({
-  classNames        : 'menu-dropdown-wrapper',
-  attributeBindings : ['style'],
-  classNameBindings : ['button:menu-dropdown-wrapper-button'],
+  classNames             : 'menu-dropdown-wrapper',
+  attributeBindings      : ['style'],
+  classNameBindings      : ['button:menu-dropdown-wrapper-button'],
 
-  displayMenu       : false,
-  isMouseOver       : false,
-  taskTimeout       : 1200,
-  taskTimeoutShort  : 50,
-  fontSize          : 13,
-  textAlign         : 'left',
-  menuAlign         : 'right',
-  icon              : 'ellipsis vertical',
+  isMouseOver            : false,
+  displayMenu            : false,
+  displayMenuPermanently : false,
+
+  taskTimeout            : 1200,
+  taskTimeoutShort       : 50,
+  fontSize               : 13,
+  textAlign              : 'left',
+  menuAlign              : 'right',
+  icon                   : 'ellipsis vertical',
 
   didInsertElement() {
     this._super(...arguments)

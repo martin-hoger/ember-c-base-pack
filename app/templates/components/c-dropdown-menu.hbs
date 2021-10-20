@@ -17,7 +17,7 @@
   {{/if}}
 </div>
 
-{{#if displayMenu}}
+{{#if (or displayMenu displayMenuPermanently)}}
   {{#transition-group transitionClass="menu-dropdown-fade" class=(concat "menu-dropdown " menuClass)}}
     <div
         class="ui vertical menu menu-dropdown-lines"
