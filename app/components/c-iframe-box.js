@@ -7,7 +7,7 @@ export default Component.extend({
   tagName           : 'iframe',
   classNames        : ['iframe-box'],
   classNameBindings : ['loaded:loaded:'],
-  attributeBindings : ['src', 'scrolling', 'height'],
+  attributeBindings : ['src', 'scrolling', 'height', 'name'],
   scrolling         : 'no',
   height            : null,
   loaded            : false,
