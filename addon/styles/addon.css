@@ -69,7 +69,6 @@ body.loading #loading-bar { display: block; }
 #notification-center .ui.icon.message > .icon               { font-size: 26px; margin-left: -17px; margin-right: 20px; }
 #notification-center .ui.icon.message > .icon.check.circle  { color: #2da02d; }
 
-
 /* Modal window */
 .modal-window         { background: #fff; position: fixed; top: 50%; left: 50%; bottom: -50%; transform: translate(-50%,-50%); z-index: 15; -moz-transition: all 0.3s ease-out; -webkit-transition: all 0.3s ease-out; -o-transition: all 0.3s ease-out; -ms-transition: all 0.3s ease-out; transition: all 0.3s ease-out; }
 .modal-window-content { position: absolute; top: 50px; left: 50px; right: 50px; bottom: 50px; overflow-x: visible;overflow-y: auto; padding: 20px}
